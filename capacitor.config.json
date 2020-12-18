@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "tusofia.transportify",
   "appName": "transportify-app",
   "bundledWebRuntime": false,
   "npmClient": "npm",
