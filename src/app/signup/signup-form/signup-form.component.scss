@@ -1,0 +1,16 @@
+ion-item {
+  width: 80vw;
+  --highlight-color-focused: var(--ion-login-button-background);
+  --border-color: #f5f7fa;
+}
+
+.error-color {
+  color: red;
+}
+
+.error-text {
+  width: 80vw;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

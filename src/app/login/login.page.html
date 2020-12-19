@@ -1,0 +1,36 @@
+<ion-content>
+  <form #form="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row class="logo-row ion-justify-content-center">
+        <img src="/assets/logo.svg" />
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button [disabled]="form.invalid" type="submit" class="ion-activatable ion-blue-button">
+          Log in
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-button>
+      </ion-row>
+      <div class="bottom-container">
+        <ion-row class="ion-justify-content-center"> Having trouble logging in? </ion-row>
+        <ion-row class="ion-justify-content-center ion-margin-top">
+          <div class="vertical-divider"></div>
+        </ion-row>
+        <ion-row class="ion-justify-content-center ion-margin-top" routerLink="/signup">
+          Sign up
+        </ion-row>
+      </div>
+    </ion-grid>
+  </form>
+</ion-content>
