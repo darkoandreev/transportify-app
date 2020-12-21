@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/login">
+      <ion-button routerLink="/auth/login">
         <ion-icon slot="icon-only" name="md-back-arrow"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -10,5 +10,5 @@
 </ion-header>
 
 <ion-content>
-  <app-signup-form></app-signup-form>
+  <app-signup-form (submitForm)="onSubmit($event)"></app-signup-form>
 </ion-content>

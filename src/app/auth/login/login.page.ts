@@ -1,6 +1,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthFacade } from '../store/facade/auth.facade';
 import { Component } from '@angular/core';
+import { IUser } from '../store/models';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +12,13 @@ import { Component } from '@angular/core';
 export class LoginPage {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authFacade$: AuthFacade) {
     this.initForm();
   }
 
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    const user: IUser = this.loginForm.value;
+    this.authFacade$.login(user);
   }
 
   private initForm(): void {

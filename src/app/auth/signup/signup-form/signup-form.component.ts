@@ -1,6 +1,7 @@
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Component } from '@angular/core';
+import { IUser } from '../../store/models';
 import { PasswordsMustMatch } from './validators/password-must-match.validator';
 
 @Component({
@@ -8,11 +9,17 @@ import { PasswordsMustMatch } from './validators/password-must-match.validator';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.scss'],
 })
-export class SignupFormComponent {
+export class SignupFormComponent implements OnDestroy {
+  @Output() submitForm = new EventEmitter<IUser>();
+
   signupForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.initForm();
+  }
+
+  ngOnDestroy(): void {
+    this.signupForm.reset();
   }
 
   private initForm(): void {

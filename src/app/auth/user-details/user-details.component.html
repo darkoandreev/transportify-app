@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>User details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center profile-picture-container">
+        <ion-avatar>
+          <ion-icon name="camera"></ion-icon>
+        </ion-avatar>
+        <span
+          >Преди одобрение, всяка снимка се проверява от администратор. Лицето трябва да бъде видимо
+          и да са спазени общоприети норми за благоприличие</span
+        >
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item>
+          <ion-label position="floating"
+            >First name
+            <ion-text color="danger" *ngIf="userDetailsForm.get('firstName').hasError('required')"
+              >*</ion-text
+            >
+          </ion-label>
+          <ion-input formControlName="firstName"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item>
+          <ion-label position="floating"
+            >Last name
+            <ion-text color="danger" *ngIf="userDetailsForm.get('lastName').hasError('required')"
+              >*</ion-text
+            >
+          </ion-label>
+          <ion-input formControlName="lastName"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item>
+          <ion-label position="floating"
+            >Phone number
+            <ion-text color="danger" *ngIf="userDetailsForm.get('phoneNumber').hasError('required')"
+              >*</ion-text
+            >
+          </ion-label>
+          <ion-input formControlName="phoneNumber"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item>
+          <ion-label position="floating"
+            >Date of birth
+            <ion-text color="danger" *ngIf="userDetailsForm.get('dateOfBirth').hasError('required')"
+              >*</ion-text
+            >
+          </ion-label>
+          <ion-datetime formControlName="dateOfBirth"></ion-datetime>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-radio-group formControlName="gender">
+          <ion-item>
+            <ion-label>Male</ion-label>
+            <ion-radio value="MALE"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Female</ion-label>
+            <ion-radio value="FEMALE"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-item>
+          <ion-label position="floating">Additional details </ion-label>
+          <ion-textarea formControlName="additionalDetails"></ion-textarea>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button type="submit" class="ion-activatable ion-blue-button">
+          Save details
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
