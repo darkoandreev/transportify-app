@@ -40,6 +40,10 @@ const featureReducer = createReducer(
   on(fromActions.signUpFailed, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(fromActions.updateUserDetailsSuccess, (state, { user }) => ({
+    ...state,
+    user,
   }))
 );
 

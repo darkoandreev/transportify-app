@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthFacade } from '../store/facade/auth.facade';
+import { Component } from '@angular/core';
 import { IUser } from '../store/models';
 import { Observable } from 'rxjs';
 
@@ -10,15 +10,13 @@ import { Observable } from 'rxjs';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent {
   userDetailsForm: FormGroup;
   user$: Observable<IUser> = this.authFacade$.user$;
 
   constructor(private fb: FormBuilder, private authFacade$: AuthFacade) {
     this.initForm();
   }
-
-  ngOnInit() {}
 
   onSubmit(): void {
     const user: IUser = this.userDetailsForm.value;

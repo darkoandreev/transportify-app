@@ -1,14 +1,4 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button routerLink="/auth/login">
-        <ion-icon slot="icon-only" name="md-back-arrow"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Signup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header title="Sign up" returnBackUrl="/auth/login"></app-header>
 <ion-content>
   <app-signup-form (submitForm)="onSubmit($event)"></app-signup-form>
 </ion-content>

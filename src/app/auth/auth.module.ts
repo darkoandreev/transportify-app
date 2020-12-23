@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login/login.page';
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 import { SignupPage } from './signup/signup.page';
 import { StoreModule } from '@ngrx/store';
@@ -22,6 +23,7 @@ import { reducerMap } from './store/reducers';
     AuthRoutingModule,
     StoreModule.forFeature('user', reducerMap),
     EffectsModule.forFeature([AuthEffect]),
+    SharedModule,
   ],
   declarations: [LoginPage, SignupPage, SignupFormComponent, UserDetailsComponent],
 })

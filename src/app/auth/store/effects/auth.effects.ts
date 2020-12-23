@@ -1,10 +1,10 @@
 import * as fromActions from '../actions/auth.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { IToken, IUser } from '../models';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
+import { IUser } from '../models';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 export class AuthEffect {
   constructor(
     private actions$: Actions,
-    private loginService: AuthService,
+    private authService: AuthService,
     private store: Store<IUser>,
     private router: Router,
     private storage: Storage
@@ -24,7 +24,7 @@ export class AuthEffect {
     this.actions$.pipe(
       ofType(fromActions.login),
       switchMap(({ user }) =>
-        this.loginService.login(user).pipe(
+        this.authService.login(user).pipe(
           map((response) => fromActions.loginSuccess({ response })),
           catchError((error) => [fromActions.loginFailed(error)])
         )
@@ -36,13 +36,13 @@ export class AuthEffect {
     this.actions$.pipe(
       ofType(fromActions.signUp),
       switchMap(({ user }) =>
-        this.loginService.register(user).pipe(
+        this.authService.register(user).pipe(
           map((response) => {
             const partialUser = {
               username: user.username,
               password: user.password,
             };
-            console.log(partialUser);
+
             this.store.dispatch(fromActions.login({ user: partialUser }));
             return fromActions.signUpSuccess({ user: response });
           }),
@@ -66,7 +66,7 @@ export class AuthEffect {
       this.actions$.pipe(
         ofType(fromActions.loginSuccess),
         tap((res) => {
-          this.storage.set('parsedToken', this.loginService.decodeToken(res.response.token));
+          this.storage.set('parsedToken', this.authService.decodeToken(res.response.token));
           this.router.navigate(['tabs']);
         })
       ),
@@ -77,7 +77,7 @@ export class AuthEffect {
     this.actions$.pipe(
       ofType(fromActions.updateUserDetails),
       switchMap(({ user }) =>
-        this.loginService.updateUserDetails(user).pipe(
+        this.authService.updateUserDetails(user).pipe(
           map((userDetails) => fromActions.updateUserDetailsSuccess({ user: userDetails })),
           catchError((error) => [fromActions.updateUserDetailsFailed(error)])
         )

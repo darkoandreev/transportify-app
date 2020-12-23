@@ -1,0 +1,20 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons *ngIf="showStartButtons" slot="start">
+      <ion-button [routerLink]="returnBackUrl">
+        <ion-icon slot="icon-only" name="md-back-arrow"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="showEndButtons" slot="end">
+      <ion-button [routerLink]="returnBackUrl">
+        <ion-icon slot="icon-only" name="md-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title
+      [class.title-padding-right]="showStartButtons"
+      [class.title-padding-left]="showEndButtons"
+      >{{ title }}</ion-title
+    >
+  </ion-toolbar>
+  <ng-content></ng-content>
+</ion-header>

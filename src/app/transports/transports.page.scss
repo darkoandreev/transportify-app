@@ -1,0 +1,21 @@
+ion-segment {
+  --background: #f5f7fa;
+  border-radius: 12px;
+  margin: 0 auto;
+  height: 48px;
+
+  ion-segment-button {
+    --background-checked: #005ea6;
+    --color: #243656;
+    opacity: 0.5;
+    --color-checked: #fff;
+    --border-radius: 12px;
+    --indicator-height: 0;
+    font-size: 1rem;
+    text-transform: none;
+
+    &.segment-button-checked {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<app-header title="Transports" [showStartButtons]="false" [showEndButtons]="true">
+  <ion-segment [(ngModel)]="type" scrollable>
+    <ion-segment-button value="drive">
+      <ion-label>I'll drive</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="ride">
+      <ion-label>I'll ride</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="history">
+      <ion-label>History</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</app-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container [ngSwitch]="type">
+    <app-transport-list headerLabel="Driving" *ngSwitchCase="'drive'"></app-transport-list>
+    <app-transport-list headerLabel="Riding" *ngSwitchCase="'ride'"></app-transport-list>
+    <app-transport-list headerLabel="History" *ngSwitchCase="'history'"></app-transport-list>
+  </ng-container>
+</ion-content>
