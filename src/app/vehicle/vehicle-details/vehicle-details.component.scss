@@ -1,0 +1,31 @@
+.profile-picture-container {
+  span {
+    font-size: 0.6rem;
+    text-align: center;
+    padding-top: 0.7rem;
+  }
+  ion-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e2e2e2;
+
+    ion-icon {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  width: 80vw;
+}
+
+ion-item {
+  width: 80vw;
+  --highlight-color-focused: var(--ion-login-button-background);
+  --border-color: #f5f7fa;
+}

@@ -1,10 +1,16 @@
-<app-header title="Transports" [showStartButtons]="false" [showEndButtons]="true">
+<app-header
+  title="Transports"
+  [showStartButtons]="false"
+  [showEndButtons]="true"
+  endButtonIcon="md-add"
+  (endButtonClicked)="addNewTransport()"
+>
   <ion-segment [(ngModel)]="type" scrollable>
-    <ion-segment-button value="drive">
-      <ion-label>I'll drive</ion-label>
-    </ion-segment-button>
     <ion-segment-button value="ride">
       <ion-label>I'll ride</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="drive">
+      <ion-label>I'll drive</ion-label>
     </ion-segment-button>
     <ion-segment-button value="history">
       <ion-label>History</ion-label>

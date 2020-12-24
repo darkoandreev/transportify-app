@@ -6,8 +6,8 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons *ngIf="showEndButtons" slot="end">
-      <ion-button [routerLink]="returnBackUrl">
-        <ion-icon slot="icon-only" name="md-add"></ion-icon>
+      <ion-button (click)="endButtonClicked.emit()">
+        <ion-icon slot="icon-only" [name]="endButtonIcon"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title

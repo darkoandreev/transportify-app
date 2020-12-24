@@ -1,0 +1,11 @@
+<app-header
+  title="Vehicles"
+  returnBackUrl="/tabs/transports"
+  [showEndButtons]="true"
+  endButtonIcon="md-add"
+></app-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let vehicle of vehicles$ | async"> {{ vehicle.brand }} </ion-item>
+  </ion-list>
+</ion-content>

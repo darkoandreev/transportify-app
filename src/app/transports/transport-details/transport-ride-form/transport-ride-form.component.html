@@ -1,0 +1,36 @@
+<form [formGroup]="rideForm" class="animate__animated animate__fadeIn">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-input formControlName="cityFrom">
+          <ion-icon name="locate-outline"></ion-icon>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-input>
+        <ion-row class="vertical-line-row">
+          <div class="vl"></div>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-input formControlName="cityTo">
+          <ion-icon name="location-outline"></ion-icon>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-select formControlName="numberOfSeats">
+          <ion-select-option>1</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-button type="submit" class="ion-activatable ion-blue-button">
+        Search
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</form>

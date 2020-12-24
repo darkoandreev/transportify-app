@@ -1,0 +1,29 @@
+ion-input {
+  background: #ffffff;
+  border: 1px solid #f5f7fa;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: #243656;
+
+    &:first-child {
+      margin-left: 0.5rem;
+    }
+
+    &:not(:first-child) {
+      position: absolute;
+      right: 0.5rem;
+    }
+  }
+}
+.vertical-line-row {
+  padding-left: 1.15rem;
+  padding-top: 0.5rem;
+
+  .vl {
+    border-left: 3px dotted #243656;
+    height: 3rem;
+  }
+}

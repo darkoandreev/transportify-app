@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() showStartButtons = true;
+
   @Input() showEndButtons = false;
+
+  @Input() endButtonIcon: string;
+
   @Input() returnBackUrl: string;
+
   @Input() title: string;
+
+  @Output() endButtonClicked = new EventEmitter<void>();
 }

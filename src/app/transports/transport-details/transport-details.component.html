@@ -1,0 +1,23 @@
+<app-header
+  title="New transport"
+  [showStartButtons]="false"
+  [showEndButtons]="true"
+  endButtonIcon="close-outline"
+  (endButtonClicked)="modalController.dismiss()"
+>
+  <ion-segment [(ngModel)]="type" scrollable>
+    <ion-segment-button value="ride">
+      <ion-label>I'll ride</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="drive">
+      <ion-label>I'll drive</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</app-header>
+
+<ion-content>
+  <ng-container [ngSwitch]="type">
+    <app-transport-ride-form *ngSwitchCase="'ride'">Ride</app-transport-ride-form>
+    <app-transport-drive-form *ngSwitchCase="'drive'">Drive</app-transport-drive-form>
+  </ng-container>
+</ion-content>
