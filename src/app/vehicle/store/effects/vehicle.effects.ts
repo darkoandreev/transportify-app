@@ -33,4 +33,40 @@ export class VehicleEffect {
       )
     )
   );
+
+  getVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.getVehicle),
+      switchMap(({ vehicleId }) =>
+        this.vehicleService.getVehicle(vehicleId).pipe(
+          map((vehicle) => fromActions.getVehicleSuccess({ vehicle })),
+          catchError((error) => [fromActions.getVehicleFailed(error)])
+        )
+      )
+    )
+  );
+
+  deleteVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.deleteVehicle),
+      switchMap(({ vehicleId }) =>
+        this.vehicleService.deleteVehicle(vehicleId).pipe(
+          map((vehicle) => fromActions.deleteVehicleSuccess({ vehicleId })),
+          catchError((error) => [fromActions.deleteVehicleFailed(error)])
+        )
+      )
+    )
+  );
+
+  updateVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.updateVehicle),
+      switchMap(({ vehicle }) =>
+        this.vehicleService.updateVehicle(vehicle).pipe(
+          map((updatedVehicle) => fromActions.updateVehicleSuccess({ vehicle: updatedVehicle })),
+          catchError((error) => [fromActions.updateVehicleFailed(error)])
+        )
+      )
+    )
+  );
 }

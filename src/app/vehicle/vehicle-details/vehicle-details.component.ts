@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { ActivatedRoute } from '@angular/router';
 import { IVehicle } from '../store/models/vehicle.model';
+import { Observable } from 'rxjs';
 import { VehicleFacade } from '../store/facades/vehicle.facade';
 
 @Component({
@@ -10,16 +12,36 @@ import { VehicleFacade } from '../store/facades/vehicle.facade';
   styleUrls: ['./vehicle-details.component.scss'],
 })
 export class VehicleDetailsComponent implements OnInit {
+  vehicle$: Observable<IVehicle> = this.vehicleFacade.vehicle$;
   carDetailsForm: FormGroup;
+  vehicleId: number;
 
-  constructor(private fb: FormBuilder, private vehicleFacade: VehicleFacade) {
+  constructor(
+    private fb: FormBuilder,
+    private vehicleFacade: VehicleFacade,
+    private route: ActivatedRoute
+  ) {
     this.init();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.vehicleId = this.route.snapshot.queryParams?.vehicleId;
+
+    if (this.vehicleId) {
+      this.vehicleFacade.getVehicle(this.vehicleId);
+    }
+  }
 
   onSubmit(vehicle: IVehicle): void {
-    this.vehicleFacade.addVehicle(vehicle);
+    if (this.vehicleId) {
+      vehicle = {
+        ...vehicle,
+        id: this.vehicleId,
+      };
+      this.vehicleFacade.updateVehicle(vehicle);
+    } else {
+      this.vehicleFacade.addVehicle(vehicle);
+    }
   }
 
   private init(): void {

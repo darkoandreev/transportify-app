@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TransportDetailsComponent } from './transport-details.component';
@@ -22,6 +23,7 @@ import { TransportRideFormComponent } from './transport-ride-form/transport-ride
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    ReactiveComponentModule,
   ],
 })
 export class TransportDetailsModule {}

@@ -10,3 +10,6 @@ export const { selectEntities, selectAll, selectIds, selectTotal } = adapter.get
 const selectAllVehicles = selectAll;
 
 export const getVehicles = createSelector(selectVehicleState, selectAllVehicles);
+
+const selectCurrentVehicle = createSelector(selectVehicleState, (state) => state.selectedVehicle);
+export const getVehicle = createSelector(selectVehicleState, selectCurrentVehicle);

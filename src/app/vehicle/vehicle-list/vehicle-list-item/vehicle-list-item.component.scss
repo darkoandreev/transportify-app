@@ -1,0 +1,14 @@
+:host {
+  width: 100%;
+  .icons-container {
+    ion-icon {
+      font-size: 1.3rem;
+      margin-right: 0.4rem;
+      padding-bottom: 0.5rem;
+
+      &.active {
+        color: #0070ba;
+      }
+    }
+  }
+}

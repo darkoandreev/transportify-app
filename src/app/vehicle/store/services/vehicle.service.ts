@@ -15,4 +15,16 @@ export class VehicleService {
   getVehicles(): Observable<IVehicle[]> {
     return this.http.get<IVehicle[]>(`${environment.API_URL}vehicle`);
   }
+
+  deleteVehicle(vehicleId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.API_URL}vehicle/${vehicleId}`);
+  }
+
+  getVehicle(vehicleId: number): Observable<IVehicle> {
+    return this.http.get<IVehicle>(`${environment.API_URL}vehicle/${vehicleId}`);
+  }
+
+  updateVehicle(vehicle: IVehicle): Observable<IVehicle> {
+    return this.http.patch<IVehicle>(`${environment.API_URL}vehicle`, vehicle);
+  }
 }

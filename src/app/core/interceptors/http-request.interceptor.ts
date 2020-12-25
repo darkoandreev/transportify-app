@@ -1,9 +1,9 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
+import { filter, mergeMap, switchMap } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -13,7 +13,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
     return from(this.authService.getUser()).pipe(
-      switchMap((user) => {
+      filter((user) => !!user),
+      mergeMap((user) => {
         request = request.clone({
           setHeaders: {
             userId: user.id.toString(),

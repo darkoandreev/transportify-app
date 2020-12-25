@@ -1,9 +1,9 @@
-ion-radio-group {
+.toggle-container {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
   width: 80vw;
-  ion-label {
-    padding-right: 0.5rem;
-  }
 }
 
 ion-item {

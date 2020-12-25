@@ -277,3 +277,28 @@ ion-segment {
     }
   }
 }
+
+.avatar-container {
+  span {
+    font-size: 0.6rem;
+    text-align: center;
+    padding-top: 0.7rem;
+  }
+  ion-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e2e2e2;
+
+    ion-icon {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+ion-card {
+  --background: #fff;
+  box-shadow: 2px 8px 48px -16px rgba(21, 70, 160, 0.1);
+  border-radius: 20px;
+  padding: 0 1rem;
+}

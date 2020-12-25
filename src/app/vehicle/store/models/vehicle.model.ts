@@ -8,8 +8,8 @@ export interface IVehicle {
   numberOfSeats: number;
   hasLuggageSpace: boolean;
   hasAirCondition: boolean;
-  isSmokingAllowed: boolean;
-  isFoodAllowed: boolean;
-  isDrinkAllowed: boolean;
-  isPetAllowed: boolean;
+  smokingAllowed: boolean;
+  foodAllowed: boolean;
+  drinkAllowed: boolean;
+  petAllowed: boolean;
 }

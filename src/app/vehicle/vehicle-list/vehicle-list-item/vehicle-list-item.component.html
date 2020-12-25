@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="3" class="avatar-container">
+        <ion-avatar>
+          <ion-icon *ngIf="!vehicle.image" name="car"></ion-icon>
+          <img *ngIf="vehicle.image" [src]="vehicle.image" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="5">
+        <ion-row class="ion-justify-content-center">
+          Model: <strong>{{ vehicle.model }}</strong>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          Brand: <strong>{{ vehicle.brand }}</strong>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          Color: <strong>{{ vehicle.color }}</strong>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4" class="icons-container">
+        <ion-row class="ion-justify-content-center">
+          <ion-icon [class.active]="vehicle.hasLuggageSpace" name="bag-handle"></ion-icon>
+          <ion-icon [class.active]="vehicle.hasAirCondition" name="snow"></ion-icon>
+          <ion-icon [class.active]="vehicle.foodAllowed" name="fast-food"></ion-icon>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-icon [class.active]="vehicle.drinkAllowed" name="beer"></ion-icon>
+          <ion-icon [class.active]="vehicle.petAllowed" name="paw"></ion-icon>
+          <ion-icon [class.active]="!vehicle.smokingAllowed" name="logo-no-smoking"></ion-icon>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

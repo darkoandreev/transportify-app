@@ -3,9 +3,12 @@
   returnBackUrl="/tabs/transports"
   [showEndButtons]="true"
   endButtonIcon="md-add"
+  (endButtonClicked)="router.navigateByUrl('vehicle/details')"
 ></app-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let vehicle of vehicles$ | async"> {{ vehicle.brand }} </ion-item>
-  </ion-list>
+  <app-vehicle-list
+    [vehicles]="vehicles$ | async"
+    (delete)="deleteVehicle($event)"
+    (edit)="editVehicle($event)"
+  ></app-vehicle-list>
 </ion-content>
