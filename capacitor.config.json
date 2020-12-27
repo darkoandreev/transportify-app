@@ -1,6 +1,6 @@
 {
   "appId": "tusofia.transportify",
-  "appName": "transportify-app",
+  "appName": "Transportify",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

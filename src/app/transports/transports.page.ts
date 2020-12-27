@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TransportDetailsComponent } from './transport-details/transport-details.component';
+import { TransportFacade } from './store/facades/transport.facade';
+import { TransportType } from './store/models/enums/transport-type.enum';
 
 @Component({
   selector: 'app-tab1',
@@ -8,12 +10,12 @@ import { TransportDetailsComponent } from './transport-details/transport-details
   styleUrls: ['transports.page.scss'],
 })
 export class TransportsPage {
-  type = 'ride';
+  type = TransportType.RIDE;
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, public transportFacade: TransportFacade) {}
 
-  segmentChanged(event): void {
-    console.log(event);
+  ionViewWillEnter(): void {
+    this.transportFacade.getAllRideTransports();
   }
 
   async addNewTransport(): Promise<void> {

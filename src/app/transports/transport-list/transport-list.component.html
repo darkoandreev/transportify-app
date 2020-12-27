@@ -1,10 +1,7 @@
 <ion-list class="animate__animated animate__slideInUp animate__fast">
-  <ion-list-header lines="full">
-    <ion-label>Ще се возя</ion-label>
-  </ion-list-header>
-  <ion-item-sliding *ngFor="let item of [].constructor(2); let i = index">
+  <ion-item-sliding *ngFor="let transport of transports">
     <ion-item>
-      <app-transport-list-item></app-transport-list-item>
+      <app-transport-list-item [type]="type" [transport]="transport"></app-transport-list-item>
     </ion-item>
     <ion-item-options side="end">
       <ion-item-option color="danger">Delete</ion-item-option>

@@ -1,14 +1,18 @@
+import * as fromReducer from './store/reducers';
+
 import { CommonModule } from '@angular/common';
+import { EffectsModule } from '@ngrx/effects';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 import { Tab1PageRoutingModule } from './transports-routing.module';
 import { TransportDetailsModule } from './transport-details/transport-details.module';
+import { TransportEffect } from './store/effects/transport.effects';
 import { TransportListComponent } from './transport-list/transport-list.component';
 import { TransportListItemComponent } from './transport-list/transport-list-item/transport-list-item.component';
 import { TransportsPage } from './transports.page';
-
 @NgModule({
   imports: [
     IonicModule,
@@ -17,6 +21,8 @@ import { TransportsPage } from './transports.page';
     Tab1PageRoutingModule,
     TransportDetailsModule,
     SharedModule,
+    StoreModule.forFeature('transport', fromReducer.reducerMap),
+    EffectsModule.forFeature([TransportEffect]),
   ],
   declarations: [TransportsPage, TransportListComponent, TransportListItemComponent],
 })

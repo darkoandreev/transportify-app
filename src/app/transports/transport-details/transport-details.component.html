@@ -17,7 +17,14 @@
 
 <ion-content>
   <ng-container [ngSwitch]="type">
-    <app-transport-ride-form *ngSwitchCase="'ride'">Ride</app-transport-ride-form>
-    <app-transport-drive-form *ngSwitchCase="'drive'">Drive</app-transport-drive-form>
+    <app-transport-ride-form
+      [vehicles]="vehicles$ | async"
+      *ngSwitchCase="'ride'"
+      (submitForm)="onSubmit($event)"
+      >Ride</app-transport-ride-form
+    >
+    <app-transport-drive-form [vehicles]="vehicles$ | async" *ngSwitchCase="'drive'"
+      >Drive</app-transport-drive-form
+    >
   </ng-container>
 </ion-content>

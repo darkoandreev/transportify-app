@@ -6,13 +6,13 @@
   (endButtonClicked)="addNewTransport()"
 >
   <ion-segment [(ngModel)]="type" scrollable>
-    <ion-segment-button value="ride">
+    <ion-segment-button value="RIDE">
       <ion-label>I'll ride</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="drive">
+    <ion-segment-button value="DRIVE">
       <ion-label>I'll drive</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="history">
+    <ion-segment-button value="HISTORY">
       <ion-label>History</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -20,8 +20,21 @@
 
 <ion-content [fullscreen]="true">
   <ng-container [ngSwitch]="type">
-    <app-transport-list headerLabel="Driving" *ngSwitchCase="'drive'"></app-transport-list>
-    <app-transport-list headerLabel="Riding" *ngSwitchCase="'ride'"></app-transport-list>
-    <app-transport-list headerLabel="History" *ngSwitchCase="'history'"></app-transport-list>
+    <app-transport-list
+      [type]="type"
+      [transports]="transportFacade.rideTransports$ | async"
+      headerLabel="Riding"
+      *ngSwitchCase="'RIDE'"
+    ></app-transport-list>
+    <app-transport-list
+      [type]="type"
+      headerLabel="Driving"
+      *ngSwitchCase="'DRIVE'"
+    ></app-transport-list>
+    <app-transport-list
+      [type]="type"
+      headerLabel="History"
+      *ngSwitchCase="'HISTORY'"
+    ></app-transport-list>
   </ng-container>
 </ion-content>

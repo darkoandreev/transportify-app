@@ -3,19 +3,18 @@ import * as fromActions from '../actions/auth.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../services/auth.service';
-import { IUser } from '../models';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<IUser>,
+    private alertService: AlertService,
     private router: Router,
     private storage: Storage
   ) {}
@@ -37,15 +36,7 @@ export class AuthEffect {
       ofType(fromActions.signUp),
       switchMap(({ user }) =>
         this.authService.register(user).pipe(
-          map((response) => {
-            const partialUser = {
-              username: user.username,
-              password: user.password,
-            };
-
-            this.store.dispatch(fromActions.login({ user: partialUser }));
-            return fromActions.signUpSuccess({ user: response });
-          }),
+          map((response) => fromActions.signUpSuccess({ user: response })),
           catchError((error) => [fromActions.signUpFailed(error)])
         )
       )
@@ -56,7 +47,13 @@ export class AuthEffect {
     () =>
       this.actions$.pipe(
         ofType(fromActions.signUpSuccess),
-        tap(() => this.router.navigate(['auth/signup/user-details']))
+        tap(() => {
+          this.alertService.confirmAlert(
+            'Confirm account',
+            'Please check your email and activate your account!',
+            () => this.router.navigate(['auth/login'])
+          );
+        })
       ),
     { dispatch: false }
   );
