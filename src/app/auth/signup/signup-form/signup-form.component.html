@@ -4,64 +4,72 @@
       <ion-item>
         <ion-label position="floating"
           >Email
-          <span class="error-color" *ngIf="signupForm.get('email').hasError('required')">*</span>
+          <ion-text color="danger" *ngIf="signupForm.get('email').hasError('required')">*</ion-text>
         </ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
-      <div
-        class="error-text error-color"
+      <ion-text
+        color="danger"
+        class="error-text"
         *ngIf="signupForm.get('email').hasError('email') && form.dirty"
       >
         Please enter a valid email address
-      </div>
+      </ion-text>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-item>
         <ion-label position="floating"
           >Username
-          <span class="error-color" *ngIf="signupForm.get('username').hasError('required')">*</span>
+          <ion-text color="danger" *ngIf="signupForm.get('username').hasError('required')"
+            >*</ion-text
+          >
         </ion-label>
         <ion-input formControlName="username"></ion-input>
       </ion-item>
-      <div
-        class="error-text error-color"
+      <ion-text
+        color="danger"
+        class="error-text"
         *ngIf="signupForm.get('username').hasError('minLength') && form.dirty"
       >
         Username must be at least 6 characters
-      </div>
+      </ion-text>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-item>
         <ion-label position="floating"
           >Password
-          <span class="error-color" *ngIf="signupForm.get('password').hasError('required')">*</span>
+          <ion-text color="danger" *ngIf="signupForm.get('password').hasError('required')"
+            >*</ion-text
+          >
         </ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
-      <div
-        class="error-text error-color"
+      <ion-text
+        color="danger"
+        class="error-text"
         *ngIf="signupForm.get('password').hasError('pattern') && form.dirty"
       >
         Password must be at least 8 characters with lowercase letters, uppercase letters, numbers
         and special characters
-      </div>
+      </ion-text>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-item>
         <ion-label position="floating"
           >Confirm password
-          <span class="error-color" *ngIf="signupForm.get('confirmPassword').hasError('required')"
-            >*</span
+          <ion-text color="danger" *ngIf="signupForm.get('confirmPassword').hasError('required')"
+            >*</ion-text
           >
         </ion-label>
         <ion-input type="password" formControlName="confirmPassword"></ion-input>
       </ion-item>
-      <div
-        class="error-text error-color"
+      <ion-text
+        color="danger"
+        class="error-text"
         *ngIf="signupForm.get('confirmPassword').hasError('mustMatch') && form.dirty"
       >
         Passwords must match
-      </div>
+      </ion-text>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-button [disabled]="form.invalid" type="submit" class="ion-activatable ion-blue-button">

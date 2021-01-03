@@ -1,1 +1,104 @@
-<ion-button *ngIf="vehicles?.length === 0" (click)="navigateToAddVehicle()">Add car?</ion-button>
+<ion-button class="ion-blue-button" *ngIf="vehicles?.length === 0" (click)="navigateToAddVehicle()"
+  >Add car?</ion-button
+>
+
+<form
+  *ngIf="vehicles?.length > 0"
+  [formGroup]="driveForm"
+  (ngSubmit)="onSubmit()"
+  class="animate__animated animate__fadeIn"
+>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <app-google-autocomplete
+          placeholder="Enter city from"
+          iconName="locate-outline"
+          formControlName="cityFrom"
+        ></app-google-autocomplete>
+        <ion-row class="vertical-line-row">
+          <div class="vl"></div>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <app-google-autocomplete
+          placeholder="Enter city to"
+          iconName="location-outline"
+          formControlName="cityTo"
+        ></app-google-autocomplete>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Transport date</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" formControlName="transportDate"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Transport time</ion-label>
+          <ion-datetime
+            displayFormat="HH:mm"
+            picker-format="HH:mm"
+            formControlName="transportTime"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Transport price</ion-label>
+          <ion-input type="number" formControlName="transportPrice"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Cars</ion-label>
+          <ion-select placeholder="Pick a car" formControlName="vehicleId">
+            <ion-select-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{
+              vehicle.brand
+            }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Available seats</ion-label>
+          <ion-select placeholder="Pick a number" formControlName="availableSeats">
+            <ion-select-option *ngFor="let seat of availableNumberOfSeats" [value]="seat">{{
+              seat
+            }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-item>
+          <ion-label position="floating">Additional details</ion-label>
+          <ion-textarea formControlName="additionalDetails"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-button
+        [disabled]="!driveForm.valid"
+        type="submit"
+        class="ion-activatable ion-blue-button"
+      >
+        Create
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</form>

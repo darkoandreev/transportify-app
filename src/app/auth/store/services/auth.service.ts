@@ -13,21 +13,25 @@ export class AuthService {
   constructor(private http: HttpClient, private storage: Storage) {}
 
   login(user: Partial<IUser>): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(`${environment.API_URL}user/login`, user, {
+    return this.http.post<ILoginResponse>(`${environment.AUTH_SERVICE_API_URL}user/login`, user, {
       withCredentials: true,
     });
   }
 
   register(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.API_URL}user/signup`, user, {
+    return this.http.post<IUser>(`${environment.TRANSPORTIFY_SERVICE_API_URL}user/signup`, user, {
       withCredentials: true,
     });
   }
 
   updateUserDetails(user: Partial<IUser>): Observable<IUser> {
-    return this.http.put<IUser>(`${environment.API_URL}user/user-details`, user, {
-      withCredentials: true,
-    });
+    return this.http.put<IUser>(
+      `${environment.TRANSPORTIFY_SERVICE_API_URL}user/user-details`,
+      user,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   isRegistrationFinished(user: IUser): boolean {

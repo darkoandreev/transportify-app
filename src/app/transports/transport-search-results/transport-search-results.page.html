@@ -1,0 +1,11 @@
+<app-header
+  title="Search transports"
+  [showStartButtons]="true"
+  routerLink="/tabs/transports"
+></app-header>
+
+<ion-content>
+  <app-transport-search-result-list
+    [rideTransport]="rideTransport$ | async"
+  ></app-transport-search-result-list>
+</ion-content>

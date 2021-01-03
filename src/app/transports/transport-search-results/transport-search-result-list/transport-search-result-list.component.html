@@ -1,0 +1,7 @@
+<ion-list>
+  <app-transport-search-result-list-item
+    *ngFor="let driveTransport of driveTransports$ | async"
+    [driveTransport]="driveTransport"
+    (apply)="applyForTransport($event)"
+  ></app-transport-search-result-list-item>
+</ion-list>

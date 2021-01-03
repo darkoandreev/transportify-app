@@ -1,6 +1,8 @@
 import * as fromReducer from './store/reducers';
 
 import { CommonModule } from '@angular/common';
+import { DriveTransportDetailsComponent } from './drive-transport-preview/drive-transport-details/drive-transport-details.component';
+import { DriveTransportPreviewComponent } from './drive-transport-preview/drive-transport-preview.component';
 import { EffectsModule } from '@ngrx/effects';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -12,7 +14,11 @@ import { TransportDetailsModule } from './transport-details/transport-details.mo
 import { TransportEffect } from './store/effects/transport.effects';
 import { TransportListComponent } from './transport-list/transport-list.component';
 import { TransportListItemComponent } from './transport-list/transport-list-item/transport-list-item.component';
+import { TransportSearchResultListComponent } from './transport-search-results/transport-search-result-list/transport-search-result-list.component';
+import { TransportSearchResultListItemComponent } from './transport-search-results/transport-search-result-list/transport-search-result-list-item/transport-search-result-list-item.component';
+import { TransportSearchResultsPage } from './transport-search-results/transport-search-results.page';
 import { TransportsPage } from './transports.page';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -24,6 +30,15 @@ import { TransportsPage } from './transports.page';
     StoreModule.forFeature('transport', fromReducer.reducerMap),
     EffectsModule.forFeature([TransportEffect]),
   ],
-  declarations: [TransportsPage, TransportListComponent, TransportListItemComponent],
+  declarations: [
+    TransportsPage,
+    TransportListComponent,
+    TransportListItemComponent,
+    TransportSearchResultsPage,
+    TransportSearchResultListComponent,
+    TransportSearchResultListItemComponent,
+    DriveTransportPreviewComponent,
+    DriveTransportDetailsComponent,
+  ],
 })
 export class Tab1PageModule {}

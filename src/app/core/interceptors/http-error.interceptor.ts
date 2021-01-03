@@ -30,7 +30,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         const errorMessage = `Status: ${response.error?.statusCode || response.status} Message: ${
-          response.error?.message
+          response.error?.message || response.error?.error
         }`;
 
         this.toasterService.showToaster(errorMessage, 'danger');

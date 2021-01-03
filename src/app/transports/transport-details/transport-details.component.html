@@ -23,7 +23,10 @@
       (submitForm)="onSubmit($event)"
       >Ride</app-transport-ride-form
     >
-    <app-transport-drive-form [vehicles]="vehicles$ | async" *ngSwitchCase="'drive'"
+    <app-transport-drive-form
+      [vehicles]="vehicles$ | async"
+      *ngSwitchCase="'drive'"
+      (submitForm)="onDriverFormSubmit($event)"
       >Drive</app-transport-drive-form
     >
   </ng-container>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { IDriverTransport } from '../store/models/drive.transport.model';
 import { IRideTransport } from '../store/models/ride-transport.model';
 import { IVehicle } from 'src/app/vehicle/store/models/vehicle.model';
 import { ModalController } from '@ionic/angular';
@@ -27,5 +28,9 @@ export class TransportDetailsComponent implements OnInit {
 
   onSubmit(transport: IRideTransport): void {
     this.transportFacade.createRideTransport(transport);
+  }
+
+  onDriverFormSubmit(transport: IDriverTransport): void {
+    this.transportFacade.createDriveTransport(transport);
   }
 }

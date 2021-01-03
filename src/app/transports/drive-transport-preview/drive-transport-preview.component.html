@@ -1,0 +1,14 @@
+<app-header
+  title="Drive transport preview"
+  [showStartButtons]="true"
+  routerLink="/tabs/transports"
+></app-header>
+
+<ion-content>
+  <ion-grid>
+    <app-drive-transport-details
+      (updateStatus)="updateApplicantStatus($event)"
+      [driveTransport]="driveTransport$ | async"
+    ></app-drive-transport-details>
+  </ion-grid>
+</ion-content>

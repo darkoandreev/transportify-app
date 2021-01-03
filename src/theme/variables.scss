@@ -298,7 +298,14 @@ ion-segment {
 
 ion-card {
   --background: #fff;
-  box-shadow: 2px 8px 48px -16px rgba(21, 70, 160, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
   border-radius: 20px;
   padding: 0 1rem;
+}
+
+.ion-flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

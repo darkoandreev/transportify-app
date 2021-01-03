@@ -1,0 +1,101 @@
+<ion-card>
+  <ion-grid>
+    <ion-row class="ion-justify-content-end">
+      <ion-text class="ion-big-text">{{ driveTransport.transportPrice }} лв.</ion-text>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="3" class="avatar-container">
+        <ion-avatar>
+          <ion-icon *ngIf="!driveTransport.user.imageUrl" name="camera"></ion-icon>
+          <img *ngIf="driveTransport.user.imageUrl" [src]="driveTransport.user.imageUrl" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="7">
+        <ion-row>
+          <ion-text class="ion-big-text"
+            >{{ driveTransport.user.firstName }} {{ driveTransport.user.lastName }}</ion-text
+          >
+        </ion-row>
+        <ion-row>
+          <ion-text class="distance">STAR RATING</ion-text>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button [disabled]="isAlreadyApplied" (click)="apply.emit(driveTransport)">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <hr />
+    <ion-row class="ion-align-items-center">
+      <ion-col size="8">
+        <app-cities-distance
+          [cityFrom]="driveTransport.cityFrom"
+          [cityTo]="driveTransport.cityTo"
+          [distance]="driveTransport.distance"
+        ></app-cities-distance>
+        <!-- <ion-row class="ion-justify-content-center">
+          <ion-col size="12">
+            <ion-row class="ion-align-items-center">
+              <ion-icon name="locate-outline"></ion-icon>
+              <ion-text class="city-text"><strong>{{ driveTransport.cityFrom }}</strong></ion-text>
+            </ion-row>
+            <ion-row class="vertical-line-row">
+              <div class="vl"></div>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12">
+            <ion-row class="ion-align-items-center">
+              <ion-icon name="location-outline"></ion-icon>
+              <ion-text class="city-text"><strong>{{ driveTransport.cityTo }}</strong></ion-text>
+            </ion-row>
+          </ion-col>
+        </ion-row> -->
+      </ion-col>
+      <ion-col size="4" class="icons-container">
+        <ion-row class="ion-justify-content-center">
+          <ion-icon
+            [class.active]="driveTransport.vehicle.hasLuggageSpace"
+            name="bag-handle"
+          ></ion-icon>
+          <ion-icon [class.active]="driveTransport.vehicle.hasAirCondition" name="snow"></ion-icon>
+          <ion-icon [class.active]="driveTransport.vehicle.foodAllowed" name="fast-food"></ion-icon>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-icon [class.active]="driveTransport.vehicle.drinkAllowed" name="beer"></ion-icon>
+          <ion-icon [class.active]="driveTransport.vehicle.petAllowed" name="paw"></ion-icon>
+          <ion-icon
+            [class.active]="!driveTransport.vehicle.smokingAllowed"
+            name="logo-no-smoking"
+          ></ion-icon>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <hr />
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5" class="ion-flex-col">
+        <ion-row
+          ><strong>{{ driveTransport.transportDate | date }}</strong></ion-row
+        >
+        <ion-row>Дата</ion-row>
+      </ion-col>
+      <ion-col size="2" class="ion-flex-col">
+        <ion-row
+          ><strong>{{ driveTransport.transportTime }}</strong></ion-row
+        >
+        <ion-row>Час</ion-row>
+      </ion-col>
+      <ion-col size="5" class="ion-flex-col">
+        <ion-row
+          ><strong
+            >{{ driveTransport.availableSeats }} /
+            {{ driveTransport.vehicle.numberOfSeats }}</strong
+          ></ion-row
+        >
+        <ion-row>Свободни места</ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,104 @@
+<ion-row class="ion-padding-bottom">
+  <ion-col size="8">
+    <app-cities-distance
+      [cityFrom]="driveTransport?.cityFrom"
+      [cityTo]="driveTransport?.cityTo"
+      [distance]="driveTransport?.distance"
+    ></app-cities-distance>
+  </ion-col>
+  <ion-col size="4">
+    <ion-row class="ion-align-items-center">
+      <span>Chat</span>
+      <ion-icon name="chatbubble-ellipses"></ion-icon>
+    </ion-row>
+  </ion-col>
+</ion-row>
+<ion-card>
+  <ion-row>
+    <ion-col class="ion-flex-col" size="1">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="ion-flex-col" size="3"> Дата </ion-col>
+    <ion-col class="ion-flex-col" size="8">
+      {{ driveTransport?.transportDate | date }}
+    </ion-col>
+  </ion-row>
+</ion-card>
+<ion-card>
+  <ion-row>
+    <ion-col class="ion-flex-col" size="1">
+      <ion-icon name="time-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="ion-flex-col" size="6"> Час на тръгване </ion-col>
+    <ion-col class="ion-flex-col" size="4">
+      {{ driveTransport?.transportTime }}
+    </ion-col>
+  </ion-row>
+</ion-card>
+<ion-card>
+  <ion-row>
+    <ion-col class="ion-flex-col" size="1">
+      <ion-icon name="people-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="ion-flex-col" size="6"> Свободни места </ion-col>
+    <ion-col class="ion-flex-col" size="4">
+      {{ driveTransport?.availableSeats }} от {{ driveTransport?.vehicle?.numberOfSeats }}
+    </ion-col>
+  </ion-row>
+</ion-card>
+<ion-card>
+  <ion-row>
+    <ion-col class="ion-flex-col" size="1">
+      <ion-icon name="car-sport-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="ion-flex-col" size="6"> Автомобил </ion-col>
+    <ion-col class="ion-flex-col" size="4">
+      {{ driveTransport?.vehicle.brand }} {{ driveTransport?.vehicle.model }}
+    </ion-col>
+  </ion-row>
+</ion-card>
+<ion-card>
+  <ion-row>
+    <ion-col class="ion-flex-col" size="1">
+      <ion-icon name="cash-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="ion-flex-col" size="6"> Разход на човек </ion-col>
+    <ion-col class="ion-flex-col" size="4"> {{ driveTransport?.transportPrice }} лв. </ion-col>
+  </ion-row>
+</ion-card>
+
+<ion-row class="avatar-container ion-padding-top">
+  <ng-container *ngFor="let applicant of driveTransport?.applicants">
+    <ion-col size="4" class="ion-text-center">
+      <ion-avatar>
+        <ion-icon *ngIf="!applicant.rider.imageUrl" name="camera"></ion-icon>
+        <img *ngIf="applicant.rider.imageUrl" [src]="applicant.rider.imageUrl" />
+      </ion-avatar>
+      {{ applicant.rider.firstName }} {{ applicant.rider.lastName }}
+      <ion-badge
+        [color]="
+          applicant.applicantStatus === 'PENDING'
+            ? 'warning'
+            : applicant.applicantStatus === 'REJECTED'
+            ? 'danger'
+            : 'success'
+        "
+        >{{ applicant.applicantStatus }}</ion-badge
+      >
+      <div class="actions-container" *ngIf="applicant.applicantStatus === 'PENDING'">
+        <ion-button
+          (click)="updateApplicantStatus(applicant, applicantStatus.ACCEPTED)"
+          fill="clear"
+        >
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          (click)="updateApplicantStatus(applicant, applicantStatus.REJECTED)"
+          fill="clear"
+        >
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+  </ng-container>
+</ion-row>

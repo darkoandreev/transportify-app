@@ -1,7 +1,11 @@
 <ion-list class="animate__animated animate__slideInUp animate__fast">
   <ion-item-sliding *ngFor="let transport of transports">
     <ion-item>
-      <app-transport-list-item [type]="type" [transport]="transport"></app-transport-list-item>
+      <app-transport-list-item
+        [type]="type"
+        [transport]="transport"
+        (click)="itemClicked.emit(transport)"
+      ></app-transport-list-item>
     </ion-item>
     <ion-item-options side="end">
       <ion-item-option color="danger">Delete</ion-item-option>

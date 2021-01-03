@@ -26,24 +26,29 @@
         <ion-row class="ion-text-center ion-justify-content-center">Дата</ion-row>
       </ion-col>
       <ion-col size="5.5">
-        <ion-row class="ion-text-center ion-justify-content-center"><strong>20:53</strong></ion-row>
-        <ion-row class="ion-text-center ion-justify-content-center">Час</ion-row>
+        <ng-container *ngIf="transport.transportTime">
+          <ion-row class="ion-text-center ion-justify-content-center"
+            ><strong>{{ transport.transportTime }}</strong></ion-row
+          >
+          <ion-row class="ion-text-center ion-justify-content-center">Час</ion-row>
+        </ng-container>
       </ion-col>
       <ion-col size="3.5">
-        <ion-row class="ion-text-center ion-justify-content-center"
-          ><strong>{{ transport.numberOfSeats }}</strong></ion-row
-        >
-        <ion-row class="ion-text-center ion-justify-content-center">Желани места</ion-row>
+        <ng-container *ngIf="type === 'RIDE'">
+          <ion-row class="ion-text-center ion-justify-content-center"
+            ><strong>{{ transport.numberOfSeats }}</strong></ion-row
+          >
+          <ion-row class="ion-text-center ion-justify-content-center">Желани места</ion-row>
+        </ng-container>
+        <ng-container *ngIf="type === 'DRIVE'">
+          <ion-row class="ion-text-center ion-justify-content-center"
+            ><strong
+              >{{ transport.availableSeats }} / {{ transport.vehicle.numberOfSeats }}</strong
+            ></ion-row
+          >
+          <ion-row class="ion-text-center ion-justify-content-center">Свободни места</ion-row>
+        </ng-container>
       </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="9">
-        <ion-row>
-          <ion-badge>0</ion-badge>
-          Няма резултати
-        </ion-row>
-      </ion-col>
-      <ion-col size="3"> Сподели </ion-col>
     </ion-row>
   </ion-grid>
 </ion-card>

@@ -5,7 +5,7 @@
   endButtonIcon="md-add"
   (endButtonClicked)="addNewTransport()"
 >
-  <ion-segment [(ngModel)]="type" scrollable>
+  <ion-segment [(ngModel)]="type" scrollable (ionChange)="segmentChange($event)">
     <ion-segment-button value="RIDE">
       <ion-label>I'll ride</ion-label>
     </ion-segment-button>
@@ -24,11 +24,14 @@
       [type]="type"
       [transports]="transportFacade.rideTransports$ | async"
       headerLabel="Riding"
+      (itemClicked)="rideItemClicked($event)"
       *ngSwitchCase="'RIDE'"
     ></app-transport-list>
     <app-transport-list
       [type]="type"
+      [transports]="transportFacade.driveTransports$ | async"
       headerLabel="Driving"
+      (itemClicked)="driveItemClicked($event)"
       *ngSwitchCase="'DRIVE'"
     ></app-transport-list>
     <app-transport-list

@@ -1,0 +1,22 @@
+.vertical-line-row {
+  padding-left: 0.55rem;
+  padding-top: 0.5rem;
+  align-items: center;
+
+  .vl {
+    border-left: 3px dotted #243656;
+    height: 1.1rem;
+  }
+
+  span {
+    padding-left: 1rem;
+  }
+}
+
+ion-icon {
+  font-size: 1.3rem;
+}
+
+.city-text {
+  padding-left: 0.5rem;
+}
