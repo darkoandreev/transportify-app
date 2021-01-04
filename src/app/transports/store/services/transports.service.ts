@@ -34,6 +34,13 @@ export class TransportService {
     );
   }
 
+  getRideTransportById(rideTransportId: number): Observable<IRideTransport> {
+    return this.http.get<IRideTransport>(
+      `${environment.TRANSPORTIFY_SERVICE_API_URL}ride-transport/${rideTransportId}`,
+      { withCredentials: true }
+    );
+  }
+
   getAllDriveTransports(): Observable<IDriverTransport[]> {
     return this.http.get<IDriverTransport[]>(
       `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport`,
@@ -51,10 +58,9 @@ export class TransportService {
     const params = new HttpParams()
       .set('cityFrom', transport.cityFrom)
       .set('cityTo', transport.cityTo)
-      .set('transportDate', String(transport.transportDate))
-      .set('numberOfSeats', transport.numberOfSeats.toString());
+      .set('transportDate', String(transport.transportDate));
     return this.http.get<IDriverTransport[]>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport/mapped`,
+      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport/search`,
       { withCredentials: true, params }
     );
   }

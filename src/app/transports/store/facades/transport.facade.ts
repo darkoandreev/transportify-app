@@ -4,21 +4,22 @@ import { Store, select } from '@ngrx/store';
 import {
   getDriveTransport,
   getDriveTransports,
+  getRideTransport,
   getRideTransports,
-  selectRideTransportById,
 } from '../selectors';
 
 import { IApplicant } from '../models/applicant.model';
 import { IDriverTransport } from '../models/drive.transport.model';
 import { IRideTransport } from '../models/ride-transport.model';
 import { IState } from '../reducers';
-import { ITransport } from '../models/transport.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TransportFacade {
   rideTransports$: Observable<IRideTransport[]> = this.store.pipe(select(getRideTransports));
+  rideTransport$: Observable<IRideTransport> = this.store.pipe(select(getRideTransport));
+
   driveTransports$: Observable<IDriverTransport[]> = this.store.pipe(select(getDriveTransports));
   driveTransport$: Observable<IDriverTransport> = this.store.pipe(select(getDriveTransport));
 
@@ -33,7 +34,7 @@ export class TransportFacade {
   }
 
   getAllRideTransports(): void {
-    this.store.dispatch(fromActions.getRideTransport());
+    this.store.dispatch(fromActions.getRideTransports());
   }
 
   getAllDriveTransports(): void {
@@ -44,8 +45,8 @@ export class TransportFacade {
     this.store.dispatch(fromActions.getDriveTransportById({ driveTransportId }));
   }
 
-  getRideTransportById(id: number): Observable<IRideTransport> {
-    return this.store.pipe(select(selectRideTransportById(id)));
+  getRideTransportById(rideTransportId: number): void {
+    this.store.dispatch(fromActions.getRideTransport({ rideTransportId }));
   }
 
   searchDriveTransports(transport: IRideTransport): void {

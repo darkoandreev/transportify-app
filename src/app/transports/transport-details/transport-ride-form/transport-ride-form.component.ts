@@ -24,7 +24,6 @@ export class TransportRideFormComponent {
     this.rideForm = this.fb.group({
       cityFrom: ['', Validators.required],
       cityTo: ['', Validators.required],
-      numberOfSeats: 1,
       transportDate: ['', Validators.required],
     });
   }

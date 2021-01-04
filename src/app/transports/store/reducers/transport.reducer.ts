@@ -10,6 +10,7 @@ import produce from 'immer';
 export interface ITransportState {
   error: Error;
   rideTransports: IRideTransport[];
+  rideTransport: IRideTransport;
   driveTransports: IDriverTransport[];
   driveTransport: IDriverTransport;
 }
@@ -17,6 +18,7 @@ export interface ITransportState {
 const initialState: ITransportState = {
   error: null,
   rideTransports: [],
+  rideTransport: null,
   driveTransports: [],
   driveTransport: null,
 };
@@ -39,9 +41,13 @@ const transportFeatureReducer = createReducer(
     ...state,
     error,
   })),
-  on(fromActions.getRideTransportSuccess, (state, { transports }) => ({
+  on(fromActions.getRideTransportsSuccess, (state, { transports }) => ({
     ...state,
     rideTransports: transports,
+  })),
+  on(fromActions.getRideTransportSuccess, (state, { rideTransport }) => ({
+    ...state,
+    rideTransport,
   })),
   on(fromActions.getTransportFailed, (state, { error }) => ({
     ...state,

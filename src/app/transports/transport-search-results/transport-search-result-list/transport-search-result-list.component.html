@@ -1,7 +1,17 @@
 <ion-list>
-  <app-transport-search-result-list-item
-    *ngFor="let driveTransport of driveTransports$ | async"
-    [driveTransport]="driveTransport"
-    (apply)="applyForTransport($event)"
-  ></app-transport-search-result-list-item>
+  <ng-container *ngrxLet="driveTransports$ as driveTransports">
+    <ng-container *ngIf="driveTransports?.length; else emptyList">
+      <app-transport-search-result-list-item
+        *ngFor="let driveTransport of driveTransports"
+        [driveTransport]="driveTransport"
+        (apply)="applyForTransport($event)"
+      ></app-transport-search-result-list-item>
+    </ng-container>
+
+    <ng-template #emptyList>
+      <div class="empty-list-container">
+        <ion-text>No transports found</ion-text>
+      </div>
+    </ng-template>
+  </ng-container>
 </ion-list>

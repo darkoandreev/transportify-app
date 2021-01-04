@@ -21,7 +21,7 @@
         </ion-row>
       </ion-col>
       <ion-col size="2">
-        <ion-button [disabled]="isAlreadyApplied" (click)="apply.emit(driveTransport)">
+        <ion-button [disabled]="isAlreadyApplied$ | async" (click)="apply.emit(driveTransport)">
           <ion-icon name="checkmark-done-outline"></ion-icon>
         </ion-button>
       </ion-col>
@@ -34,25 +34,6 @@
           [cityTo]="driveTransport.cityTo"
           [distance]="driveTransport.distance"
         ></app-cities-distance>
-        <!-- <ion-row class="ion-justify-content-center">
-          <ion-col size="12">
-            <ion-row class="ion-align-items-center">
-              <ion-icon name="locate-outline"></ion-icon>
-              <ion-text class="city-text"><strong>{{ driveTransport.cityFrom }}</strong></ion-text>
-            </ion-row>
-            <ion-row class="vertical-line-row">
-              <div class="vl"></div>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="12">
-            <ion-row class="ion-align-items-center">
-              <ion-icon name="location-outline"></ion-icon>
-              <ion-text class="city-text"><strong>{{ driveTransport.cityTo }}</strong></ion-text>
-            </ion-row>
-          </ion-col>
-        </ion-row> -->
       </ion-col>
       <ion-col size="4" class="icons-container">
         <ion-row class="ion-justify-content-center">

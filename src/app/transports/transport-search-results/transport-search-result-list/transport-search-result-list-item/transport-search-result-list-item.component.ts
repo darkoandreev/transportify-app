@@ -7,6 +7,8 @@ import {
   Output,
 } from '@angular/core';
 
+import { ApplicantStatusEnum } from 'src/app/transports/store/models/applicant.model';
+import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { IDriverTransport } from 'src/app/transports/store/models/drive.transport.model';
 
 @Component({
@@ -20,17 +22,21 @@ export class TransportSearchResultListItemComponent implements OnInit {
 
   @Output() apply = new EventEmitter<IDriverTransport>();
 
-  isAlreadyApplied: boolean;
+  isAlreadyApplied$: Promise<boolean>;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-    this.isAlreadyApplied = this.getIsAlreadyApplied(this.driveTransport);
+  ngOnInit(): void {
+    this.isAlreadyApplied$ = this.getIsAlreadyApplied(this.driveTransport);
   }
 
-  private getIsAlreadyApplied(transport: IDriverTransport): boolean {
+  private async getIsAlreadyApplied(transport: IDriverTransport): Promise<boolean> {
+    const user = await this.authService.getUser();
     return transport.applicants.some(
-      (applicant) => applicant.rider.id === 1 && applicant.applicantStatus === 'PENDING'
+      (applicant) =>
+        +applicant.rider.id === +user.id &&
+        (applicant.applicantStatus === ApplicantStatusEnum.PENDING ||
+          applicant.applicantStatus === ApplicantStatusEnum.ACCEPTED)
     );
   }
 }

@@ -24,15 +24,16 @@ export class TransportsPage {
   ) {}
 
   ionViewWillEnter(): void {
-    this.transportFacade.getAllRideTransports();
+    this.getTransportsBySegmentType();
+  }
+
+  doRefresh(event: any): void {
+    this.getTransportsBySegmentType();
+    event.target.complete();
   }
 
   segmentChange(): void {
-    if (this.type === TransportType.DRIVE) {
-      this.transportFacade.getAllDriveTransports();
-    } else if (this.type === TransportType.RIDE) {
-      this.transportFacade.getAllRideTransports();
-    }
+    this.getTransportsBySegmentType();
   }
 
   rideItemClicked(transport: IRideTransport): void {
@@ -49,5 +50,13 @@ export class TransportsPage {
     });
 
     await modal.present();
+  }
+
+  private getTransportsBySegmentType(): void {
+    if (this.type === TransportType.DRIVE) {
+      this.transportFacade.getAllDriveTransports();
+    } else if (this.type === TransportType.RIDE) {
+      this.transportFacade.getAllRideTransports();
+    }
   }
 }

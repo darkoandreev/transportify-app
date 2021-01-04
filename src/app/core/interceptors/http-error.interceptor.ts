@@ -8,7 +8,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ToasterService } from '../services/toaster.service';
 import { catchError } from 'rxjs/operators';
@@ -16,9 +16,9 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
-    private router: Router,
     private toasterService: ToasterService,
-    private storage: Storage
+    private storage: Storage,
+    private navCtrl: NavController
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,7 +26,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((response: HttpErrorResponse) => {
         if (response.error.statusCode === 403 || response.status === 403) {
           this.storage.remove('parsedToken');
-          this.router.navigate(['auth/login']);
+          this.navCtrl.navigateRoot('auth/login');
         }
 
         const errorMessage = `Status: ${response.error?.statusCode || response.status} Message: ${

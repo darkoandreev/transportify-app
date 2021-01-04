@@ -19,6 +19,9 @@
 </app-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
   <ng-container [ngSwitch]="type">
     <app-transport-list
       [type]="type"

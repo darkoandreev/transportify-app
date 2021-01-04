@@ -15,8 +15,13 @@ export class DriveTransportPreviewComponent {
 
   constructor(private transportFacade: TransportFacade, private route: ActivatedRoute) {}
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     const driveTransportId = +this.route.snapshot.paramMap.get('id');
+
+    if (!driveTransportId) {
+      return;
+    }
+
     this.transportFacade.getDriveTransportById(driveTransportId);
   }
 

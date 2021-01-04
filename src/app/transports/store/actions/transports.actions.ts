@@ -19,10 +19,24 @@ export const createRideTransportFailed = createAction(
 );
 
 // GET RIDE TRANSPORTS
-export const getRideTransport = createAction('[Transports Page] Get ride transport');
+export const getRideTransports = createAction('[Transports Page] Get ride transports');
+export const getRideTransportsSuccess = createAction(
+  '[Transports Page] Get ride transports success',
+  props<{ transports: IRideTransport[] }>()
+);
+export const getTransportsFailed = createAction(
+  '[Transports Page] Get ride transports failed',
+  (error: Error) => ({ error })
+);
+
+// GET RIDE TRANSPORT
+export const getRideTransport = createAction(
+  '[Transports Page] Get ride transport',
+  props<{ rideTransportId: number }>()
+);
 export const getRideTransportSuccess = createAction(
   '[Transports Page] Get ride transport success',
-  props<{ transports: IRideTransport[] }>()
+  props<{ rideTransport: IRideTransport }>()
 );
 export const getTransportFailed = createAction(
   '[Transports Page] Get ride transport failed',

@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { Tab1PageRoutingModule } from './transports-routing.module';
@@ -29,6 +30,7 @@ import { TransportsPage } from './transports.page';
     SharedModule,
     StoreModule.forFeature('transport', fromReducer.reducerMap),
     EffectsModule.forFeature([TransportEffect]),
+    ReactiveComponentModule,
   ],
   declarations: [
     TransportsPage,
