@@ -5,7 +5,7 @@
   endButtonIcon="md-add"
   (endButtonClicked)="addNewTransport()"
 >
-  <ion-segment [(ngModel)]="type" scrollable (ionChange)="segmentChange($event)">
+  <ion-segment [(ngModel)]="type" scrollable (ionChange)="segmentChange()">
     <ion-segment-button value="RIDE">
       <ion-label>I'll ride</ion-label>
     </ion-segment-button>
