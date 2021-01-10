@@ -1,13 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ApplicantStatusEnum, IApplicant } from 'src/app/transports/store/models/applicant.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ApplicantStatusEnum } from 'src/app/transports/store/models/applicant.model';
 import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { IDriverTransport } from 'src/app/transports/store/models/drive.transport.model';
 
@@ -17,26 +10,39 @@ import { IDriverTransport } from 'src/app/transports/store/models/drive.transpor
   styleUrls: ['./transport-search-result-list-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransportSearchResultListItemComponent implements OnInit {
-  @Input() driveTransport: IDriverTransport;
+export class TransportSearchResultListItemComponent {
+  @Input()
+  get driveTransport(): IDriverTransport {
+    return this._driveTransport;
+  }
+  set driveTransport(driveTransport: IDriverTransport) {
+    if (driveTransport) {
+      this._driveTransport = driveTransport;
+      this.applicant$ = this.getApplicant(driveTransport);
+      this.isAlreadyApplied$ = this.getIsAlreadyApplied(this.applicant$);
+    }
+  }
 
   @Output() apply = new EventEmitter<IDriverTransport>();
 
+  readonly applicantStatus = ApplicantStatusEnum;
   isAlreadyApplied$: Promise<boolean>;
+  applicant$: Promise<IApplicant>;
+
+  private _driveTransport: IDriverTransport;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.isAlreadyApplied$ = this.getIsAlreadyApplied(this.driveTransport);
+  private async getIsAlreadyApplied(applicant: Promise<IApplicant>): Promise<boolean> {
+    const appl = await applicant;
+    return (
+      appl?.applicantStatus === ApplicantStatusEnum.PENDING ||
+      appl?.applicantStatus === ApplicantStatusEnum.ACCEPTED
+    );
   }
 
-  private async getIsAlreadyApplied(transport: IDriverTransport): Promise<boolean> {
+  private async getApplicant(transport: IDriverTransport): Promise<IApplicant> {
     const user = await this.authService.getUser();
-    return transport.applicants.some(
-      (applicant) =>
-        +applicant.rider.id === +user.id &&
-        (applicant.applicantStatus === ApplicantStatusEnum.PENDING ||
-          applicant.applicantStatus === ApplicantStatusEnum.ACCEPTED)
-    );
+    return transport.applicants.find((applicant) => applicant.rider.id === user.id);
   }
 }

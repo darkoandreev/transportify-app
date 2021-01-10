@@ -30,7 +30,6 @@ import { TransportsPage } from './transports.page';
     SharedModule,
     StoreModule.forFeature('transport', fromReducer.reducerMap),
     EffectsModule.forFeature([TransportEffect]),
-    ReactiveComponentModule,
   ],
   declarations: [
     TransportsPage,

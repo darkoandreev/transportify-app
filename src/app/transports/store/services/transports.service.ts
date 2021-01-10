@@ -12,45 +12,55 @@ export class TransportService {
   constructor(private http: HttpClient) {}
 
   createRideTransport(transport: IRideTransport): Observable<IRideTransport> {
-    return this.http.post<IRideTransport>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}ride-transport`,
-      transport,
-      { withCredentials: true }
-    );
+    return this.http.post<IRideTransport>(`${environment.API_URL}ride-transport`, transport, {
+      withCredentials: true,
+    });
   }
 
   createDriveTransport(transport: IDriverTransport): Observable<IDriverTransport> {
     return this.http.post<IDriverTransport>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport/${transport.vehicleId}`,
+      `${environment.API_URL}drive-transport/${transport.vehicleId}`,
       transport,
       { withCredentials: true }
     );
   }
 
   getAllRideTransports(): Observable<IRideTransport[]> {
-    return this.http.get<IRideTransport[]>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}ride-transport`,
-      { withCredentials: true }
-    );
+    return this.http.get<IRideTransport[]>(`${environment.API_URL}ride-transport`, {
+      withCredentials: true,
+    });
   }
 
   getRideTransportById(rideTransportId: number): Observable<IRideTransport> {
     return this.http.get<IRideTransport>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}ride-transport/${rideTransportId}`,
+      `${environment.API_URL}ride-transport/${rideTransportId}`,
+      { withCredentials: true }
+    );
+  }
+
+  deleteRideTransport(rideTransportId: number): Observable<IRideTransport> {
+    return this.http.delete<IRideTransport>(
+      `${environment.API_URL}ride-transport/${rideTransportId}`,
       { withCredentials: true }
     );
   }
 
   getAllDriveTransports(): Observable<IDriverTransport[]> {
-    return this.http.get<IDriverTransport[]>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport`,
-      { withCredentials: true }
-    );
+    return this.http.get<IDriverTransport[]>(`${environment.API_URL}drive-transport`, {
+      withCredentials: true,
+    });
   }
 
   getDriveTransportById(driveTransportId: number): Observable<IDriverTransport> {
     return this.http.get<IDriverTransport>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport/${driveTransportId}`
+      `${environment.API_URL}drive-transport/${driveTransportId}`
+    );
+  }
+
+  deleteDriveTransport(driveTransportId: number): Observable<IDriverTransport> {
+    return this.http.delete<IDriverTransport>(
+      `${environment.API_URL}drive-transport/${driveTransportId}`,
+      { withCredentials: true }
     );
   }
 
@@ -59,22 +69,27 @@ export class TransportService {
       .set('cityFrom', transport.cityFrom)
       .set('cityTo', transport.cityTo)
       .set('transportDate', String(transport.transportDate));
-    return this.http.get<IDriverTransport[]>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}drive-transport/search`,
-      { withCredentials: true, params }
-    );
+    return this.http.get<IDriverTransport[]>(`${environment.API_URL}drive-transport/search`, {
+      withCredentials: true,
+      params,
+    });
   }
 
   applyForTransport(transport: IDriverTransport): Observable<IApplicant> {
-    return this.http.post<IApplicant>(`${environment.TRANSPORTIFY_SERVICE_API_URL}applicant`, {
-      driveTransportId: transport.id,
-    });
+    return this.http.post<IApplicant>(
+      `${environment.API_URL}applicant`,
+      {
+        driveTransportId: transport.id,
+      },
+      { withCredentials: true }
+    );
   }
 
   updateApplicantStatus(applicant: IApplicant): Observable<IApplicant> {
     return this.http.patch<IApplicant>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}applicant/status/${applicant.id}`,
-      applicant
+      `${environment.API_URL}applicant/status/${applicant.id}`,
+      applicant,
+      { withCredentials: true }
     );
   }
 }

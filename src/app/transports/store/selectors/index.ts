@@ -10,7 +10,6 @@ export const getRideTransports = createSelector(selectTransportState, selectRide
 
 // RIDE TRANSPORT
 const selectRideTransport = createSelector(selectTransportState, (state) => state.rideTransport);
-
 export const getRideTransport = createSelector(selectTransportState, selectRideTransport);
 
 // DRIVE TRANSPORTS

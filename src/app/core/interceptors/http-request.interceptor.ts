@@ -19,6 +19,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           setHeaders: {
             userId: user.id.toString(),
           },
+          withCredentials: true,
         });
 
         return next.handle(request);

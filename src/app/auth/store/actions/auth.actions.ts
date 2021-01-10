@@ -11,6 +11,12 @@ export const loginFailed = createAction(
   '[Login Page] Login Failed',
   props<{ error: IAuthError }>()
 );
+
+// LOGOUT
+export const logOut = createAction('[Logout] User logout');
+export const logOutSuccess = createAction('[Logout] User logout success');
+
+// IS AUTHENTICATED
 export const isAuthenticated = createAction('[Login Page] Is user authenticated');
 export const isAuthenticatedSuccess = createAction('[Login Page] Is user authenticated success');
 export const isAuthenticatedFailed = createAction('[Login Page] Is user authenticated failed');
@@ -34,5 +40,16 @@ export const updateUserDetailsSuccess = createAction(
 );
 export const updateUserDetailsFailed = createAction(
   '[User details Page] Update user details Failed',
+  props<{ error: IAuthError }>()
+);
+
+// GET USER DETAILS
+export const getUserDetails = createAction('[Profile Page] Get user details');
+export const getUserDetailsSuccess = createAction(
+  '[Profile Page] Get user details Success',
+  props<{ user: IUser }>()
+);
+export const getUserDetailsFailed = createAction(
+  '[Profile Page] Get user details Failed',
   props<{ error: IAuthError }>()
 );

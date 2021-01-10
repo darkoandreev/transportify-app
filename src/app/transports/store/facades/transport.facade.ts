@@ -45,8 +45,16 @@ export class TransportFacade {
     this.store.dispatch(fromActions.getDriveTransportById({ driveTransportId }));
   }
 
+  deleteDriveTransport(driveTransportId: number): void {
+    this.store.dispatch(fromActions.deleteDriveTransport({ driveTransportId }));
+  }
+
   getRideTransportById(rideTransportId: number): void {
     this.store.dispatch(fromActions.getRideTransport({ rideTransportId }));
+  }
+
+  deleteRideTransport(rideTransportId: number): void {
+    this.store.dispatch(fromActions.deleteRideTransport({ rideTransportId }));
   }
 
   searchDriveTransports(transport: IRideTransport): void {

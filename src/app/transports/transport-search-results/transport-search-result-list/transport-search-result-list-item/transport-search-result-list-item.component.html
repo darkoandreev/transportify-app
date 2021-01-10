@@ -1,6 +1,15 @@
 <ion-card>
   <ion-grid>
-    <ion-row class="ion-justify-content-end">
+    <ion-row
+      class="ion-justify-content-between ion-margin-bottom"
+      *ngIf="applicant$ | async as applicant"
+    >
+      <ion-badge
+        [color]="applicant?.applicantStatus === applicantStatus.PENDING ? 'warning' : 'success'"
+        >{{
+          applicant?.applicantStatus === applicantStatus.PENDING ? 'Pending' : 'Accepted'
+        }}</ion-badge
+      >
       <ion-text class="ion-big-text">{{ driveTransport.transportPrice }} лв.</ion-text>
     </ion-row>
     <ion-row class="ion-align-items-center">

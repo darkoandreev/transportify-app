@@ -43,6 +43,20 @@ export const getTransportFailed = createAction(
   (error: Error) => ({ error })
 );
 
+// DELETE RIDE TRANSPORT
+export const deleteRideTransport = createAction(
+  '[Transports Page] Delete ride transport',
+  props<{ rideTransportId: number }>()
+);
+export const deleteRideTransportSuccess = createAction(
+  '[Transports Page] Delete ride transport success',
+  props<{ rideTransport: IRideTransport }>()
+);
+export const deleteRideTransportFailed = createAction(
+  '[Transports Page] Delete ride transport failed',
+  (error: Error) => ({ error })
+);
+
 // CREATE DRIVE TRANSPORT
 export const createDriveTransport = createAction(
   '[Transports Page] Create drive transport',
@@ -93,6 +107,20 @@ export const searchDriveTransportSuccess = createAction(
 );
 export const searchDriveTransportFailed = createAction(
   '[Transports Page] Search drive transports failed',
+  (error: Error) => ({ error })
+);
+
+// DELETE RIDE TRANSPORT
+export const deleteDriveTransport = createAction(
+  '[Transports Page] Delete drive transport',
+  props<{ driveTransportId: number }>()
+);
+export const deleteDriveTransportSuccess = createAction(
+  '[Transports Page] Delete drive transport success',
+  props<{ driveTransport: IRideTransport }>()
+);
+export const deleteDriveTransportFailed = createAction(
+  '[Transports Page] Delete drive transport failed',
   (error: Error) => ({ error })
 );
 

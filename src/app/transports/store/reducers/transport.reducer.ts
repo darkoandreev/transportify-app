@@ -1,8 +1,8 @@
 import * as fromActions from '../actions/transports.actions';
 
 import { Action, createReducer, on } from '@ngrx/store';
+import { ApplicantStatusEnum, IApplicant } from '../models/applicant.model';
 
-import { IApplicant } from '../models/applicant.model';
 import { IDriverTransport } from '../models/drive.transport.model';
 import { IRideTransport } from '../models/ride-transport.model';
 import produce from 'immer';
@@ -33,6 +33,10 @@ const transportFeatureReducer = createReducer(
     ...state,
     error,
   })),
+  on(fromActions.deleteRideTransportSuccess, (state, { rideTransport }) => ({
+    ...state,
+    rideTransports: state.rideTransports.filter((transport) => transport.id !== rideTransport.id),
+  })),
   on(fromActions.createDriveTransportSuccess, (state, { transport }) => ({
     ...state,
     driveTransports: [...state.driveTransports, transport],
@@ -61,6 +65,12 @@ const transportFeatureReducer = createReducer(
     ...state,
     error,
   })),
+  on(fromActions.deleteDriveTransportSuccess, (state, { driveTransport }) => ({
+    ...state,
+    driveTransports: state.driveTransports.filter(
+      (transport) => transport.id !== driveTransport.id
+    ),
+  })),
   on(fromActions.searchDriveTransportSuccess, (state, { transports }) => ({
     ...state,
     driveTransports: transports,
@@ -76,7 +86,11 @@ const transportFeatureReducer = createReducer(
           draftState.driveTransports.findIndex((d) => d.id === applicant.driveTransportId)
         ];
       driveTransport.applicants.push(applicant);
-      driveTransport.availableSeats -= 1;
+      if (applicant.applicantStatus === ApplicantStatusEnum.ACCEPTED) {
+        driveTransport.availableSeats -= 1;
+      } else if (applicant.applicantStatus === ApplicantStatusEnum.REJECTED) {
+        driveTransport.availableSeats += 1;
+      }
     });
   }),
   on(fromActions.getDriveTransportByIdSuccess, (state, { transport }) => ({

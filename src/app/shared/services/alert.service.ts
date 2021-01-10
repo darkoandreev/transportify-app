@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class AlertService {
   constructor(private alertController: AlertController) {}
 
-  async confirmAlert(header: string, message: string, callback = (): void => {}) {
+  async confirmAlert(header: string, message: string, callback: () => void) {
     const alert = await this.alertController.create({
       header,
       message,

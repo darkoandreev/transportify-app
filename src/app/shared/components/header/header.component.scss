@@ -1,22 +1,27 @@
-ion-toolbar {
-  --border-color: #fff;
+:host {
+  --header-background: white;
 
-  ion-title {
-    padding-left: 0;
-    padding-right: 0;
-    text-align: center;
-    font-weight: 600;
+  ion-toolbar {
+    --border-color: #fff;
+    --background: var(--header-background);
 
-    &.title-padding-right {
-      padding-right: 3rem;
+    ion-title {
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+      font-weight: 600;
+
+      &.title-padding-right {
+        padding-right: 3rem;
+      }
+
+      &.title-padding-left {
+        padding-left: 3rem;
+      }
     }
 
-    &.title-padding-left {
-      padding-left: 3rem;
+    ion-icon {
+      color: #243656;
     }
-  }
-
-  ion-icon {
-    color: #243656;
   }
 }

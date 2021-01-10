@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  TRANSPORTIFY_SERVICE_API_URL: 'transportify-service/api/',
-  AUTH_SERVICE_API_URL: 'auth-service/api/',
+  API_URL: 'http://localhost:8080/api/',
+  // API_URL: 'http://192.168.0.105:8080/api/',
 };
 
 /*

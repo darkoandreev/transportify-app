@@ -1,0 +1,102 @@
+<ion-grid>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="speedometer"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">Пътувания като шофьор</ion-col>
+        <ion-col class="ion-flex-col" size="3">0</ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="person"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">Пътувания като пътник</ion-col>
+        <ion-col class="ion-flex-col" size="3">0</ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card routerLink="/vehicle">
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="car"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">Автомобили</ion-col>
+        <ion-col class="ion-flex-col" size="3">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="star"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">Оценки и коментари</ion-col>
+        <ion-col class="ion-flex-col" size="3">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="call"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">{{ user?.phoneNumber }}</ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="accessibility"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="8">Пол</ion-col>
+        <ion-col class="ion-flex-col" size="3">
+          {{ user?.gender }}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="calendar-clear"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="6">Роден на</ion-col>
+        <ion-col class="ion-flex-col" size="5">
+          {{ user?.dateOfBirth }}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col class="ion-flex-col" size="1">
+          <ion-icon name="calendar"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-flex-col" size="6">Регистриран на</ion-col>
+        <ion-col class="ion-flex-col" size="5">
+          {{ user?.registeredOn }}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-button (click)="logOutChange.emit()" class="ion-blue-button">Log out</ion-button>
+  </ion-row>
+</ion-grid>

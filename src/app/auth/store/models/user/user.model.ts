@@ -11,6 +11,5 @@ export interface IUser {
   gender: GenderEnum;
   phoneNumber: string;
   registeredOn?: Date;
-  lastSeen?: Date;
   imageUrl: string;
 }

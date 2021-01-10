@@ -1,3 +1,20 @@
-<app-header [showStartButtons]="false" title="Profile"></app-header>
+<ng-container *ngIf="user$ | async as user">
+  <div class="header-container">
+    <img src="assets/header-fill.png" />
+    <ion-icon name="md-edit"></ion-icon>
+    <span>Profile</span>
+  </div>
+  <ion-row class="ion-justify-content-center avatar-container">
+    <p>{{ user?.firstName }} {{ user?.lastName }}</p>
 
-<ion-content [fullscreen]="true"> </ion-content>
+    <ion-avatar>
+      <img src="assets/default-avatar.png" />
+    </ion-avatar>
+  </ion-row>
+</ng-container>
+<ion-content [fullscreen]="true">
+  <app-profile-details
+    [user]="user$ | async"
+    (logOutChange)="authFacade.logOut()"
+  ></app-profile-details>
+</ion-content>

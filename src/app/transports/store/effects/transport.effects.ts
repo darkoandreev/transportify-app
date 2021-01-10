@@ -1,7 +1,7 @@
 import * as fromActions from '../actions/transports.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -83,6 +83,18 @@ export class TransportEffect {
     )
   );
 
+  deleteRideTransport$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.deleteRideTransport),
+      switchMap(({ rideTransportId }) =>
+        this.transportService.deleteRideTransport(rideTransportId).pipe(
+          map((rideTransport) => fromActions.deleteRideTransportSuccess({ rideTransport })),
+          catchError((error) => [fromActions.deleteRideTransportFailed(error)])
+        )
+      )
+    )
+  );
+
   getDriveTransports$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.getDriveTransports),
@@ -107,10 +119,22 @@ export class TransportEffect {
     )
   );
 
+  deleteDriveTransport$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.deleteDriveTransport),
+      switchMap(({ driveTransportId }) =>
+        this.transportService.deleteDriveTransport(driveTransportId).pipe(
+          map((driveTransport) => fromActions.deleteDriveTransportSuccess({ driveTransport })),
+          catchError((error) => [fromActions.deleteDriveTransportFailed(error)])
+        )
+      )
+    )
+  );
+
   searchDriveTransports$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.searchDriveTransports),
-      switchMap(({ transport }) =>
+      mergeMap(({ transport }) =>
         this.transportService.searchDriveTransports(transport).pipe(
           map((transports) => fromActions.searchDriveTransportSuccess({ transports })),
           catchError((error) => [fromActions.searchDriveTransportFailed(error)])

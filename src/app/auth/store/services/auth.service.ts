@@ -1,8 +1,8 @@
 import * as jwtDecode from 'jwt-decode';
 
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ILoginResponse, IToken, IUser } from '../models';
 
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
@@ -13,25 +13,27 @@ export class AuthService {
   constructor(private http: HttpClient, private storage: Storage) {}
 
   login(user: Partial<IUser>): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(`${environment.AUTH_SERVICE_API_URL}user/login`, user, {
+    return this.http.post<ILoginResponse>(`${environment.API_URL}user/login`, user, {
       withCredentials: true,
     });
   }
 
   register(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.TRANSPORTIFY_SERVICE_API_URL}user/signup`, user, {
+    return this.http.post<IUser>(`${environment.API_URL}user/signup`, user, {
       withCredentials: true,
     });
   }
 
   updateUserDetails(user: Partial<IUser>): Observable<IUser> {
-    return this.http.put<IUser>(
-      `${environment.TRANSPORTIFY_SERVICE_API_URL}user/user-details`,
-      user,
-      {
-        withCredentials: true,
-      }
-    );
+    return this.http.put<IUser>(`${environment.API_URL}user/user-details`, user, {
+      withCredentials: true,
+    });
+  }
+
+  getUserDetails(): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.API_URL}user`, {
+      withCredentials: true,
+    });
   }
 
   isRegistrationFinished(user: IUser): boolean {

@@ -44,6 +44,10 @@ const featureReducer = createReducer(
   on(fromActions.updateUserDetailsSuccess, (state, { user }) => ({
     ...state,
     user,
+  })),
+  on(fromActions.getUserDetailsSuccess, (state, { user }) => ({
+    ...state,
+    user,
   }))
 );
 

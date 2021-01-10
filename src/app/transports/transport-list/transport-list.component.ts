@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { IDriverTransport } from '../store/models/drive.transport.model';
 import { IRideTransport } from '../store/models/ride-transport.model';
@@ -18,4 +26,6 @@ export class TransportListComponent {
   @Input() headerLabel: string;
 
   @Output() itemClicked = new EventEmitter<IRideTransport>();
+
+  @Output() deleteChange = new EventEmitter<number>();
 }

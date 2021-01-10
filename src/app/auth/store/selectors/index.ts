@@ -4,4 +4,5 @@ import { IUserState } from '../reducers/auth.reducer';
 
 export const selectUserState = createFeatureSelector<IUserState>('user');
 
-export const selectUser = createSelector(selectUserState, (state) => state.user);
+const getUser = createSelector(selectUserState, (state) => state.user);
+export const selectUser = createSelector(selectUserState, getUser);

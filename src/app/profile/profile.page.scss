@@ -1,0 +1,49 @@
+.avatar-container {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 50px;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  ion-avatar {
+    width: 147px;
+    height: 147px;
+    border: 2px solid white;
+  }
+}
+.header-container {
+  height: 192px;
+  z-index: 9999;
+  background: radial-gradient(122.27% 198.92% at -22.27% -27.38%, #0070ba 0%, #1546a0 100%);
+
+  img {
+    opacity: 0.3;
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 2rem;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  ion-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 2.2rem;
+    font-size: 1.5rem;
+  }
+}

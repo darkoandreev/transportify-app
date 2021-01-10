@@ -23,6 +23,18 @@ export class AuthFacade {
     this.store.dispatch(fromActions.signUp({ user }));
   }
 
+  logOut(): void {
+    this.store.dispatch(fromActions.logOut());
+  }
+
+  getUserDetails(): void {
+    this.store.dispatch(fromActions.getUserDetails());
+  }
+
+  getUser(): Promise<IUser> {
+    return this.authService.getUser();
+  }
+
   async updateUserDetails(user: Partial<IUser>): Promise<void> {
     const userFromStorage = await this.authService.getUser();
     user = {

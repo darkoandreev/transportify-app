@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { from } from 'rxjs';
 
 @Injectable()
 export class AuthEffect {
@@ -38,6 +39,18 @@ export class AuthEffect {
         this.authService.register(user).pipe(
           map((response) => fromActions.signUpSuccess({ user: response })),
           catchError((error) => [fromActions.signUpFailed(error)])
+        )
+      )
+    )
+  );
+
+  getUserDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.getUserDetails),
+      switchMap(() =>
+        this.authService.getUserDetails().pipe(
+          map((user) => fromActions.getUserDetailsSuccess({ user })),
+          catchError((error) => [fromActions.getUserDetailsFailed(error)])
         )
       )
     )
@@ -92,5 +105,27 @@ export class AuthEffect {
         })
       ),
     { dispatch: false }
+  );
+
+  logOut$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.logOut),
+      switchMap(() =>
+        from(this.storage.remove('parsedToken')).pipe(map(() => fromActions.logOutSuccess()))
+      )
+    )
+  );
+
+  logOutSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromActions.logOutSuccess),
+        tap(() => {
+          this.router.navigate(['auth/login']);
+        })
+      ),
+    {
+      dispatch: false,
+    }
   );
 }

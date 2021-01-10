@@ -28,6 +28,7 @@
       [transports]="transportFacade.rideTransports$ | async"
       headerLabel="Riding"
       (itemClicked)="rideItemClicked($event)"
+      (deleteChange)="deleteRideTranport($event)"
       *ngSwitchCase="'RIDE'"
     ></app-transport-list>
     <app-transport-list
@@ -35,6 +36,7 @@
       [transports]="transportFacade.driveTransports$ | async"
       headerLabel="Driving"
       (itemClicked)="driveItemClicked($event)"
+      (deleteChange)="deleteDriveTranport($event)"
       *ngSwitchCase="'DRIVE'"
     ></app-transport-list>
     <app-transport-list
