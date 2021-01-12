@@ -121,14 +121,7 @@ export class TransportsPage implements OnInit {
     });
 
     PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
-      console.log('Push received: ' + JSON.stringify(notification));
+      console.log('Push received: ' + JSON.stringify(notification.data));
     });
-
-    PushNotifications.addListener(
-      'pushNotificationActionPerformed',
-      (notification: PushNotificationActionPerformed) => {
-        console.log('Push action performed: ' + JSON.stringify(notification));
-      }
-    );
   }
 }

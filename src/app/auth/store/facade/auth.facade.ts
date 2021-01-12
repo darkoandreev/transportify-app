@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   user$: Observable<IUser> = this.store.pipe(select(fromSelectors.selectUser));
+  userDetails$: Observable<IUser> = this.store.pipe(select(fromSelectors.selectUserDetails));
 
   constructor(private store: Store<IState>, private authService: AuthService) {}
 

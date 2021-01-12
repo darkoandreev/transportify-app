@@ -1,0 +1,96 @@
+<form
+  #form="ngForm"
+  [formGroup]="userDetailsForm"
+  (ngSubmit)="submitChange.emit(userDetailsForm.value)"
+>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center avatar-container">
+      <ion-avatar (click)="openCameraOptions()">
+        <ng-container *ngrxLet="fileUploadResponse$ as fileUploadResponse">
+          <ion-icon *ngIf="!fileUploadResponse && !user?.imageUrl" name="camera"></ion-icon>
+          <img
+            *ngIf="fileUploadResponse || user?.imageUrl"
+            [src]="fileUploadResponse?.fileDownloadUri || user?.imageUrl"
+          />
+        </ng-container>
+      </ion-avatar>
+      <span
+        >Преди одобрение, всяка снимка се проверява от администратор. Лицето трябва да бъде видимо и
+        да са спазени общоприети норми за благоприличие</span
+      >
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        <ion-label position="floating"
+          >First name
+          <ion-text color="danger" *ngIf="userDetailsForm.get('firstName').hasError('required')"
+            >*</ion-text
+          >
+        </ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        <ion-label position="floating"
+          >Last name
+          <ion-text color="danger" *ngIf="userDetailsForm.get('lastName').hasError('required')"
+            >*</ion-text
+          >
+        </ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        <ion-label position="floating"
+          >Phone number
+          <ion-text color="danger" *ngIf="userDetailsForm.get('phoneNumber').hasError('required')"
+            >*</ion-text
+          >
+        </ion-label>
+        <ion-input formControlName="phoneNumber"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        <ion-label position="floating"
+          >Date of birth
+          <ion-text color="danger" *ngIf="userDetailsForm.get('dateOfBirth').hasError('required')"
+            >*</ion-text
+          >
+        </ion-label>
+        <ion-datetime formControlName="dateOfBirth"></ion-datetime>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-radio-group formControlName="gender">
+        <ion-item>
+          <ion-label>Male</ion-label>
+          <ion-radio value="MALE"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Female</ion-label>
+          <ion-radio value="FEMALE"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        <ion-label position="floating">Additional details </ion-label>
+        <ion-textarea formControlName="additionalDetails"></ion-textarea>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-button
+        [disabled]="!userDetailsForm.valid"
+        type="submit"
+        class="ion-activatable ion-blue-button"
+      >
+        {{ user ? 'Update details' : 'Save details' }}
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</form>

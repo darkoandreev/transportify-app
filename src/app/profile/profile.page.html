@@ -1,20 +1,21 @@
 <ng-container *ngIf="user$ | async as user">
   <div class="header-container">
     <img src="assets/header-fill.png" />
-    <ion-icon name="md-edit"></ion-icon>
+    <ion-icon (click)="goToUserDetailsPage()" name="md-edit"></ion-icon>
     <span>Profile</span>
   </div>
   <ion-row class="ion-justify-content-center avatar-container">
     <p>{{ user?.firstName }} {{ user?.lastName }}</p>
 
     <ion-avatar>
-      <img src="assets/default-avatar.png" />
+      <img [src]="user.imageUrl" />
     </ion-avatar>
   </ion-row>
 </ng-container>
 <ion-content [fullscreen]="true">
-  <app-profile-details
+  <!-- <app-profile-details
     [user]="user$ | async"
     (logOutChange)="authFacade.logOut()"
-  ></app-profile-details>
+  ></app-profile-details> -->
+  <ion-router-outlet></ion-router-outlet>
 </ion-content>

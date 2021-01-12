@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'user-details',
         component: UserDetailsComponent,
       },
+      {
+        path: 'user-details/:id',
+        component: UserDetailsComponent,
+      },
     ],
   },
 ];

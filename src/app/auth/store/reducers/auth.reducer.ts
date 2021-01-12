@@ -10,6 +10,7 @@ import { IUser } from '../models';
 export interface IUserState extends EntityState<IUser> {
   isAuthenticated: boolean;
   user: IUser | null;
+  userDetails: IUser | null;
   error: IAuthError;
 }
 
@@ -18,6 +19,7 @@ export const adapter: EntityAdapter<IUser> = createEntityAdapter<IUser>();
 const initialState: IUserState = adapter.getInitialState({
   isAuthenticated: false,
   user: null,
+  userDetails: null,
   error: null,
 });
 
@@ -47,7 +49,7 @@ const featureReducer = createReducer(
   })),
   on(fromActions.getUserDetailsSuccess, (state, { user }) => ({
     ...state,
-    user,
+    userDetails: user,
   }))
 );
 

@@ -1,37 +1,28 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
 import { AuthFacade } from '../store/facade/auth.facade';
 import { Component } from '@angular/core';
+import { IUploadFileResponse } from 'src/app/core/model/upload-file.response';
 import { IUser } from '../store/models';
 import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent {
-  userDetailsForm: FormGroup;
-  user$: Observable<IUser> = this.authFacade$.user$;
+  fileUploadResponse$: Observable<IUploadFileResponse>;
+  user$: Observable<IUser> = this.authFacade$.userDetails$;
 
-  constructor(private fb: FormBuilder, private authFacade$: AuthFacade) {
-    this.initForm();
+  constructor(private authFacade$: AuthFacade, private route: ActivatedRoute) {}
+
+  ionViewWillEnter(): void {
+    const userId = +this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.authFacade$.getUserDetails();
+    }
   }
 
-  onSubmit(): void {
-    const user: IUser = this.userDetailsForm.value;
+  onSubmit(user: IUser): void {
     this.authFacade$.updateUserDetails(user);
-  }
-
-  private initForm(): void {
-    this.userDetailsForm = this.fb.group({
-      image: ['test', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      gender: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      additionalDetails: '',
-    });
   }
 }

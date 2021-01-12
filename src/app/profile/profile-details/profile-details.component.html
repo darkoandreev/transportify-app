@@ -1,4 +1,4 @@
-<ion-grid>
+<ion-grid *ngIf="user$ | async as user">
   <ion-row>
     <ion-card>
       <ion-row>
@@ -34,7 +34,7 @@
       </ion-row>
     </ion-card>
   </ion-row>
-  <ion-row>
+  <ion-row routerLink="rating">
     <ion-card>
       <ion-row>
         <ion-col class="ion-flex-col" size="1">
@@ -78,7 +78,7 @@
         </ion-col>
         <ion-col class="ion-flex-col" size="6">Роден на</ion-col>
         <ion-col class="ion-flex-col" size="5">
-          {{ user?.dateOfBirth }}
+          {{ user?.dateOfBirth | date }}
         </ion-col>
       </ion-row>
     </ion-card>
@@ -91,7 +91,7 @@
         </ion-col>
         <ion-col class="ion-flex-col" size="6">Регистриран на</ion-col>
         <ion-col class="ion-flex-col" size="5">
-          {{ user?.registeredOn }}
+          {{ user?.registeredOn | date }}
         </ion-col>
       </ion-row>
     </ion-card>
