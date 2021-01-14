@@ -17,34 +17,6 @@ export class TransportEffect {
     private modalCtrl: ModalController
   ) {}
 
-  createRideTransport$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.createRideTransport),
-      switchMap(({ transport }) =>
-        this.transportService.createRideTransport(transport).pipe(
-          map((createdTransport) =>
-            fromActions.createRideTransportSuccess({ transport: createdTransport })
-          ),
-          catchError((error) => [fromActions.createRideTransportFailed(error)])
-        )
-      )
-    )
-  );
-
-  createRideTransportSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(fromActions.createRideTransportSuccess),
-        tap(({ transport }) => {
-          this.router.navigate(['tabs/transports/results/', transport.id]);
-          this.modalCtrl.dismiss();
-        })
-      ),
-    {
-      dispatch: false,
-    }
-  );
-
   createDriveTransport$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.createDriveTransport),
@@ -54,42 +26,6 @@ export class TransportEffect {
             fromActions.createDriveTransportSuccess({ transport: createdTransport })
           ),
           catchError((error) => [fromActions.createDriveTransportFailed(error)])
-        )
-      )
-    )
-  );
-
-  getRideTransports$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.getRideTransports),
-      switchMap(() =>
-        this.transportService.getAllRideTransports().pipe(
-          map((transports) => fromActions.getRideTransportsSuccess({ transports })),
-          catchError((error) => [fromActions.getTransportsFailed(error)])
-        )
-      )
-    )
-  );
-
-  getRideTransport$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.getRideTransport),
-      switchMap(({ rideTransportId }) =>
-        this.transportService.getRideTransportById(rideTransportId).pipe(
-          map((rideTransport) => fromActions.getRideTransportSuccess({ rideTransport })),
-          catchError((error) => [fromActions.getTransportFailed(error)])
-        )
-      )
-    )
-  );
-
-  deleteRideTransport$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.deleteRideTransport),
-      switchMap(({ rideTransportId }) =>
-        this.transportService.deleteRideTransport(rideTransportId).pipe(
-          map((rideTransport) => fromActions.deleteRideTransportSuccess({ rideTransport })),
-          catchError((error) => [fromActions.deleteRideTransportFailed(error)])
         )
       )
     )
@@ -131,25 +67,13 @@ export class TransportEffect {
     )
   );
 
-  searchDriveTransports$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.searchDriveTransports),
-      mergeMap(({ transport }) =>
-        this.transportService.searchDriveTransports(transport).pipe(
-          map((transports) => fromActions.searchDriveTransportSuccess({ transports })),
-          catchError((error) => [fromActions.searchDriveTransportFailed(error)])
-        )
-      )
-    )
-  );
-
   applyForTransport$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.applyForTransport),
       switchMap(({ transport }) =>
         this.transportService.applyForTransport(transport).pipe(
           map((applicant) => fromActions.applyForTransportSuccess({ applicant })),
-          catchError((error) => [fromActions.searchDriveTransportFailed(error)])
+          catchError((error) => [fromActions.applyForTransportFailed(error)])
         )
       )
     )

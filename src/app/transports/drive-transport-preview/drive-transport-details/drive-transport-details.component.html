@@ -70,7 +70,7 @@
 <ion-row class="avatar-container ion-padding-top">
   <ng-container *ngFor="let applicant of driveTransport?.applicants">
     <ion-col size="4" class="ion-text-center">
-      <ion-avatar>
+      <ion-avatar [routerLink]="['/tabs/profile/rating', applicant.rider.id]">
         <ion-icon *ngIf="!applicant.rider.imageUrl" name="camera"></ion-icon>
         <img *ngIf="applicant.rider.imageUrl" [src]="applicant.rider.imageUrl" />
       </ion-avatar>

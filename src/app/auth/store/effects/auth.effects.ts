@@ -1,12 +1,12 @@
 import * as fromActions from '../actions/auth.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { from } from 'rxjs';
 
@@ -17,6 +17,7 @@ export class AuthEffect {
     private authService: AuthService,
     private alertService: AlertService,
     private router: Router,
+    private route: ActivatedRoute,
     private storage: Storage
   ) {}
 
@@ -77,7 +78,8 @@ export class AuthEffect {
         ofType(fromActions.loginSuccess),
         tap((res) => {
           this.storage.set('parsedToken', this.authService.decodeToken(res.response.token));
-          this.router.navigate(['tabs']);
+          const returnUrl = this.route.snapshot.queryParams?.returnUrl || '/tabs';
+          this.router.navigate([returnUrl]);
         })
       ),
     { dispatch: false }

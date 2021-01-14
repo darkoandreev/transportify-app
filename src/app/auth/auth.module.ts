@@ -14,6 +14,7 @@ import { SignupPage } from './signup/signup.page';
 import { StoreModule } from '@ngrx/store';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserDetailsFormComponent } from './user-details/user-details-form/user-details-form.component';
+import { UserRatingEffect } from './store/effects/user-rating.effects';
 import { reducerMap } from './store/reducers';
 
 @NgModule({
@@ -23,8 +24,8 @@ import { reducerMap } from './store/reducers';
     IonicModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    StoreModule.forFeature('user', reducerMap),
-    EffectsModule.forFeature([AuthEffect]),
+    StoreModule.forFeature('userFeature', reducerMap),
+    EffectsModule.forFeature([AuthEffect, UserRatingEffect]),
     SharedModule,
     ReactiveComponentModule,
   ],

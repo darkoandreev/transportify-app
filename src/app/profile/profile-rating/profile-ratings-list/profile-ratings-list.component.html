@@ -1,0 +1,14 @@
+<ng-container *ngIf="userRatings?.length; else emptyRatings">
+  <ion-item *ngFor="let rating of userRatings">
+    <ion-avatar slot="start">
+      <img [src]="rating.id.raterUser.imageUrl" />
+    </ion-avatar>
+    <ion-label>
+      <h3>{{ rating.id.raterUser.firstName }} {{ rating.id.raterUser.lastName }}</h3>
+      <p>{{ rating.comment }}</p>
+    </ion-label>
+  </ion-item>
+</ng-container>
+<ng-template #emptyRatings>
+  <ion-row class="ion-justify-content-center empty-ratings"> Няма оценки и коментари </ion-row>
+</ng-template>

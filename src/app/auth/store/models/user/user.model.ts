@@ -12,4 +12,5 @@ export interface IUser {
   phoneNumber: string;
   registeredOn?: Date;
   imageUrl: string;
+  currentRating: number;
 }

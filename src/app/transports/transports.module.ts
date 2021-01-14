@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { RideTransportEffect } from './store/effects/ride-transport.effects';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { Tab1PageRoutingModule } from './transports-routing.module';
@@ -15,6 +16,7 @@ import { TransportDetailsModule } from './transport-details/transport-details.mo
 import { TransportEffect } from './store/effects/transport.effects';
 import { TransportListComponent } from './transport-list/transport-list.component';
 import { TransportListItemComponent } from './transport-list/transport-list-item/transport-list-item.component';
+import { TransportSearchEffect } from './store/effects/transport-search.effects';
 import { TransportSearchResultListComponent } from './transport-search-results/transport-search-result-list/transport-search-result-list.component';
 import { TransportSearchResultListItemComponent } from './transport-search-results/transport-search-result-list/transport-search-result-list-item/transport-search-result-list-item.component';
 import { TransportSearchResultsPage } from './transport-search-results/transport-search-results.page';
@@ -29,7 +31,7 @@ import { TransportsPage } from './transports.page';
     TransportDetailsModule,
     SharedModule,
     StoreModule.forFeature('transport', fromReducer.reducerMap),
-    EffectsModule.forFeature([TransportEffect]),
+    EffectsModule.forFeature([TransportEffect, TransportSearchEffect, RideTransportEffect]),
   ],
   declarations: [
     TransportsPage,

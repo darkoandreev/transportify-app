@@ -1,0 +1,18 @@
+<ion-row class="ion-align-items-center">
+  <ion-col class="ion-flex-col" size="4">
+    <ion-avatar class="current-rating-avatar">{{ occurrences?.userRating | number }}</ion-avatar>
+  </ion-col>
+
+  <ion-col class="ion-flex-col" size="8">
+    <ion-row *ngFor="let rating of [5, 4, 3, 2, 1]">
+      <d-ng-rating [size]="5" [rating]="rating" readonly>
+        <ng-template let-hovered="hovered">
+          <span class="star" [class.filled]="hovered">&#9733;</span>
+        </ng-template>
+        <d-ng-rating-label>{{
+          occurrences?.ratingOccurrences[rating] ? occurrences?.ratingOccurrences[rating] : 0
+        }}</d-ng-rating-label>
+      </d-ng-rating>
+    </ion-row>
+  </ion-col>
+</ion-row>

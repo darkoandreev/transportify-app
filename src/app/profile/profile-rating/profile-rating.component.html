@@ -1,5 +1,42 @@
-<ion-grid>
-  <ion-row>
-    <d-ng-rating [size]="5"></d-ng-rating>
-  </ion-row>
-</ion-grid>
+<app-header
+  title="Оценки и коментари"
+  returnBackUrl="/tabs/profile"
+  [showEndButtons]="!!this.ratedUserId"
+  endButtonIcon="star-outline"
+  (endButtonClicked)="openRatingModal()"
+></app-header>
+
+<ion-content>
+  <ion-grid>
+    <app-profile-rating-occurrences
+      [occurrences]="userRatingFacade.ratingOccurrences$ | async"
+    ></app-profile-rating-occurrences>
+    <ion-row class="ion-justify-content-center ion-padding-top">
+      <ion-card
+        *ngFor="let rating of [5, 4, 3, 2, 1]; let i = index"
+        [class.active-card]="i === selectedCardIndex"
+        (click)="ratingCardClicked(i, rating)"
+      >
+        <d-ng-rating
+          class="rating-tabs"
+          (rateChange)="this.ratingLabel = $event"
+          [size]="rating"
+          [rating]="rating"
+          readonly
+        >
+          <ng-template let-hovered="hovered">
+            <span class="star" [class.filled]="hovered">&#9733;</span>
+          </ng-template>
+        </d-ng-rating>
+      </ion-card>
+    </ion-row>
+
+    <ng-container [ngSwitch]="selectedCardIndex">
+      <ion-list *ngSwitchCase="selectedCardIndex">
+        <app-profile-ratings-list
+          [userRatings]="userRatingFacade.userRatings$ | async"
+        ></app-profile-ratings-list>
+      </ion-list>
+    </ng-container>
+  </ion-grid>
+</ion-content>

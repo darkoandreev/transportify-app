@@ -13,7 +13,11 @@
       <ion-text class="ion-big-text">{{ driveTransport.transportPrice }} лв.</ion-text>
     </ion-row>
     <ion-row class="ion-align-items-center">
-      <ion-col size="3" class="avatar-container">
+      <ion-col
+        size="3"
+        class="avatar-container"
+        [routerLink]="['/tabs/profile/rating/', driveTransport.user.id]"
+      >
         <ion-avatar>
           <ion-icon *ngIf="!driveTransport.user.imageUrl" name="camera"></ion-icon>
           <img *ngIf="driveTransport.user.imageUrl" [src]="driveTransport.user.imageUrl" />

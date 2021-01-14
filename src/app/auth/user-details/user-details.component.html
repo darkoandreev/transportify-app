@@ -1,6 +1,7 @@
 <app-header
+  *ngrxLet="user$ as user"
   title="User details"
-  [showStartButtons]="(user$ | async) === null"
+  [showStartButtons]="!!user"
   returnBackUrl="/tabs/profile"
 ></app-header>
 

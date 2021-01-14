@@ -4,14 +4,6 @@ import { ITransportState } from '../reducers/transport.reducer';
 
 export const selectTransportState = createFeatureSelector<ITransportState>('transport');
 
-// RIDE TRANSPORTS
-const selectRideTransports = createSelector(selectTransportState, (state) => state.rideTransports);
-export const getRideTransports = createSelector(selectTransportState, selectRideTransports);
-
-// RIDE TRANSPORT
-const selectRideTransport = createSelector(selectTransportState, (state) => state.rideTransport);
-export const getRideTransport = createSelector(selectTransportState, selectRideTransport);
-
 // DRIVE TRANSPORTS
 const selectDriveTransports = createSelector(
   selectTransportState,

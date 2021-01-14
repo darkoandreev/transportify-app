@@ -17,6 +17,7 @@ import {
 import { IDriverTransport } from '../../store/models/drive.transport.model';
 import { IRideTransport } from '../../store/models/ride-transport.model';
 import { Observable } from 'rxjs';
+import { Platform } from '@ionic/angular';
 import { PushNotificationService } from 'src/app/core/services/push-notification.service';
 import { TransportFacade } from '../../store/facades/transport.facade';
 
@@ -29,7 +30,7 @@ const { PushNotifications } = Plugins;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransportSearchResultListComponent implements OnInit, OnDestroy {
-  driveTransports$: Observable<IDriverTransport[]> = this.transportFacade.driveTransports$;
+  driveTransports$: Observable<IDriverTransport[]> = this.transportFacade.searchResults$;
 
   @Input()
   get rideTransport(): IRideTransport {
@@ -46,7 +47,7 @@ export class TransportSearchResultListComponent implements OnInit, OnDestroy {
 
   constructor(
     private transportFacade: TransportFacade,
-    private zone: NgZone,
+    private platform: Platform,
     private pushService: PushNotificationService
   ) {}
 
@@ -59,7 +60,9 @@ export class TransportSearchResultListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    PushNotifications.removeAllListeners();
+    if (this.platform.is('cordova')) {
+      PushNotifications.removeAllListeners();
+    }
   }
 
   applyForTransport(transport: IDriverTransport): void {

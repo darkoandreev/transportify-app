@@ -1,0 +1,26 @@
+.current-rating-avatar {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background: #e2e2e2;
+  font-size: 1.3rem;
+  color: #1e90ff;
+}
+
+.star {
+  font-size: 1rem;
+  color: #b0c4de;
+}
+
+.filled {
+  cursor: pointer;
+  color: #1e90ff;
+}
+
+d-ng-rating {
+  display: flex;
+
+  d-ng-rating-label {
+    font-size: 1rem;
+  }
+}

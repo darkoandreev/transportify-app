@@ -1,4 +1,7 @@
-<ion-grid *ngIf="user$ | async as user">
+<ion-grid>
+  <ion-row class="ion-justify-content-center" *ngIf="user?.currentRating">
+    <d-ng-rating [size]="5" [rating]="user.currentRating" readonly></d-ng-rating>
+  </ion-row>
   <ion-row>
     <ion-card>
       <ion-row>

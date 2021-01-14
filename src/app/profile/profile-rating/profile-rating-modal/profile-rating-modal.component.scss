@@ -1,0 +1,9 @@
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ion-item {
+    width: 100%;
+  }
+}

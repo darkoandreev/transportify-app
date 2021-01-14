@@ -1,7 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { IRideTransport } from '../store/models/ride-transport.model';
-import { Observable } from 'rxjs';
 import { TransportFacade } from '../store/facades/transport.facade';
 
 @Component({
@@ -10,17 +9,15 @@ import { TransportFacade } from '../store/facades/transport.facade';
   styleUrls: ['./transport-search-results.page.scss'],
 })
 export class TransportSearchResultsPage {
-  rideTransport$: Observable<IRideTransport> = this.transportFacade.rideTransport$;
+  rideTransport: Partial<IRideTransport>;
 
   constructor(private route: ActivatedRoute, private transportFacade: TransportFacade) {}
 
   ionViewWillEnter(): void {
-    const rideTransportId = +this.route.snapshot.paramMap.get('id');
+    this.rideTransport = this.route.snapshot.queryParams;
+  }
 
-    if (!rideTransportId) {
-      return;
-    }
-
-    this.transportFacade.getRideTransportById(rideTransportId);
+  ionViewWillLeave(): void {
+    this.transportFacade.resetSearchResults();
   }
 }

@@ -1,0 +1,14 @@
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <d-ng-rating [size]="5" (rateChange)="currentRate = $event"></d-ng-rating>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label position="floating">Comment</ion-label>
+      <ion-textarea [(ngModel)]="comment"></ion-textarea>
+    </ion-item>
+  </ion-row>
+  <ion-row>
+    <ion-button (click)="rate()" class="ion-blue-button">Vote</ion-button>
+  </ion-row>
+</ion-grid>

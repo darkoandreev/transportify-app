@@ -1,12 +1,11 @@
 import * as fromActions from '../actions/transports.actions';
+import * as fromRideActions from '../actions/ride-transport.actions';
+import * as fromRideSelector from '../reducers/ride-transport.reducer';
+import * as fromSearchResultActions from '../actions/transport-search.actions';
+import * as fromSearchResultSelector from '../reducers/transport-search.reducer';
 
 import { Store, select } from '@ngrx/store';
-import {
-  getDriveTransport,
-  getDriveTransports,
-  getRideTransport,
-  getRideTransports,
-} from '../selectors';
+import { getDriveTransport, getDriveTransports } from '../selectors';
 
 import { IApplicant } from '../models/applicant.model';
 import { IDriverTransport } from '../models/drive.transport.model';
@@ -17,24 +16,36 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TransportFacade {
-  rideTransports$: Observable<IRideTransport[]> = this.store.pipe(select(getRideTransports));
-  rideTransport$: Observable<IRideTransport> = this.store.pipe(select(getRideTransport));
+  rideTransports$: Observable<IRideTransport[]> = this.store.pipe(select(fromRideSelector.getAll));
+  rideTransport$: Observable<IRideTransport> = this.store.pipe(select(fromRideSelector.getOne));
 
   driveTransports$: Observable<IDriverTransport[]> = this.store.pipe(select(getDriveTransports));
   driveTransport$: Observable<IDriverTransport> = this.store.pipe(select(getDriveTransport));
 
+  searchResults$: Observable<IDriverTransport[]> = this.store.pipe(
+    select(fromSearchResultSelector.getAll)
+  );
+
   constructor(private store: Store<IState>) {}
 
   createRideTransport(transport: IRideTransport): void {
-    this.store.dispatch(fromActions.createRideTransport({ transport }));
+    this.store.dispatch(fromRideActions.createRideTransport({ transport }));
+  }
+
+  getAllRideTransports(): void {
+    this.store.dispatch(fromRideActions.getRideTransports());
+  }
+
+  getRideTransportById(rideTransportId: number): void {
+    this.store.dispatch(fromRideActions.getRideTransport({ rideTransportId }));
+  }
+
+  deleteRideTransport(rideTransportId: number): void {
+    this.store.dispatch(fromRideActions.deleteRideTransport({ rideTransportId }));
   }
 
   createDriveTransport(transport: IDriverTransport): void {
     this.store.dispatch(fromActions.createDriveTransport({ transport }));
-  }
-
-  getAllRideTransports(): void {
-    this.store.dispatch(fromActions.getRideTransports());
   }
 
   getAllDriveTransports(): void {
@@ -49,16 +60,12 @@ export class TransportFacade {
     this.store.dispatch(fromActions.deleteDriveTransport({ driveTransportId }));
   }
 
-  getRideTransportById(rideTransportId: number): void {
-    this.store.dispatch(fromActions.getRideTransport({ rideTransportId }));
-  }
-
-  deleteRideTransport(rideTransportId: number): void {
-    this.store.dispatch(fromActions.deleteRideTransport({ rideTransportId }));
-  }
-
   searchDriveTransports(transport: IRideTransport): void {
-    this.store.dispatch(fromActions.searchDriveTransports({ transport }));
+    this.store.dispatch(fromSearchResultActions.searchDriveTransports({ transport }));
+  }
+
+  resetSearchResults(): void {
+    this.store.dispatch(fromSearchResultActions.resetSearchResult());
   }
 
   applyForTransport(transport: IDriverTransport): void {

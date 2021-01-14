@@ -53,7 +53,14 @@ export class TransportsPage implements OnInit {
   }
 
   rideItemClicked(transport: IRideTransport): void {
-    this.router.navigate(['results', transport.id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['results', transport.id], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        cityFrom: transport.cityFrom,
+        cityTo: transport.cityTo,
+        transportDate: transport.transportDate,
+      },
+    });
   }
 
   deleteRideTranport(rideTransportId: number): void {

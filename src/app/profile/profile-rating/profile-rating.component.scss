@@ -1,3 +1,28 @@
 ion-grid {
-  margin-top: 4rem;
+  .rating-tabs .star {
+    font-size: 0.7rem;
+  }
+}
+
+.filled {
+  cursor: pointer;
+  color: #1e90ff;
+}
+
+d-ng-rating {
+  display: flex;
+  align-items: center;
+}
+
+ion-card {
+  padding: 0;
+  margin-right: 0.1rem;
+
+  &.active-card {
+    background-color: #1e90ff;
+
+    .filled {
+      color: #fff;
+    }
+  }
 }

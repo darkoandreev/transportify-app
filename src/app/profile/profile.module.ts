@@ -8,6 +8,9 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
 import { ProfilePage } from './profile.page';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfileRatingComponent } from './profile-rating/profile-rating.component';
+import { ProfileRatingModalComponent } from './profile-rating/profile-rating-modal/profile-rating-modal.component';
+import { ProfileRatingOccurrencesComponent } from './profile-rating/profile-rating-occurrences/profile-rating-occurrences.component';
+import { ProfileRatingsListComponent } from './profile-rating/profile-ratings-list/profile-ratings-list.component';
 import { SharedModule } from '../shared/shared.module';
 @NgModule({
   imports: [
@@ -19,6 +22,13 @@ import { SharedModule } from '../shared/shared.module';
     AuthModule,
     NgRatingModule,
   ],
-  declarations: [ProfilePage, ProfileDetailsComponent, ProfileRatingComponent],
+  declarations: [
+    ProfilePage,
+    ProfileDetailsComponent,
+    ProfileRatingComponent,
+    ProfileRatingOccurrencesComponent,
+    ProfileRatingsListComponent,
+    ProfileRatingModalComponent,
+  ],
 })
 export class ProfilePageModule {}
