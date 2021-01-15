@@ -48,8 +48,8 @@ export class AuthEffect {
   getUserDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.getUserDetails),
-      switchMap(() =>
-        this.authService.getUserDetails().pipe(
+      switchMap(({ username }) =>
+        this.authService.getUserDetails(username).pipe(
           map((user) => fromActions.getUserDetailsSuccess({ user })),
           catchError((error) => [fromActions.getUserDetailsFailed(error)])
         )

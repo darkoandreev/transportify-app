@@ -1,0 +1,16 @@
+<app-header
+  title="My Notifications"
+  [showStartButtons]="false"
+  [showEndButtons]="true"
+  endButtonIcon="ellipsis-horizontal"
+  (endButtonClicked)="presentPopover($event)"
+>
+  <div class="list-header-container">
+    <ion-text>Не получавате известия?</ion-text>
+    <ion-icon name="alert-circle-outline"></ion-icon>
+  </div>
+</app-header>
+
+<ion-content [fullscreen]="true">
+  <app-my-notifications-list></app-my-notifications-list>
+</ion-content>

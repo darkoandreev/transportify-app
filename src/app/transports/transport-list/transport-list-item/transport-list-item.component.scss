@@ -1,13 +1,24 @@
 :host {
   width: 100%;
-  ion-card {
-    .city-name {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
 
-    .distance {
-      padding: 10px 0;
+  ion-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2e2e2;
+    flex-direction: column;
+
+    ion-icon {
+      font-size: 1.5rem;
     }
+  }
+
+  span {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  app-cities-distance {
+    --font-size: 1.2rem;
   }
 }

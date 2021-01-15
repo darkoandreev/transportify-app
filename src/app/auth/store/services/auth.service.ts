@@ -30,9 +30,16 @@ export class AuthService {
     });
   }
 
-  getUserDetails(): Observable<IUser> {
-    return this.http.get<IUser>(`${environment.API_URL}user`, {
+  getUserDetails(username: string): Observable<IUser> {
+    let params = new HttpParams();
+
+    if (username) {
+      params = params.append('username', username);
+    }
+
+    return this.http.get<IUser>(`${environment.API_URL}user${username ? '/user-details' : ''}`, {
       withCredentials: true,
+      params,
     });
   }
 

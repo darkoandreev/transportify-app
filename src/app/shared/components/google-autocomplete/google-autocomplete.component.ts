@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,11 +7,13 @@ import {
   NgZone,
   ViewChild,
   forwardRef,
+  Inject,
+  OnDestroy,
+  Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonInput } from '@ionic/angular';
-
 @Component({
   selector: 'app-google-autocomplete',
   templateUrl: './google-autocomplete.component.html',
@@ -24,7 +27,7 @@ import { IonInput } from '@ionic/angular';
     },
   ],
 })
-export class GoogleAutocompleteComponent implements AfterViewInit, ControlValueAccessor {
+export class GoogleAutocompleteComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   @ViewChild('input') private inputElement: IonInput;
 
   @Input() disabled = false;
@@ -33,9 +36,13 @@ export class GoogleAutocompleteComponent implements AfterViewInit, ControlValueA
 
   @Input() placeholder: string;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
+  ) {}
 
-  async ngAfterViewInit() {
+  async ngAfterViewInit(): Promise<void> {
     const options = {
       types: ['(cities)'],
       fields: ['address_component'],
@@ -52,7 +59,17 @@ export class GoogleAutocompleteComponent implements AfterViewInit, ControlValueA
     });
   }
 
-  onChange = (value: string) => {};
+  ngOnDestroy(): void {
+    const elements = this.document.getElementsByClassName('pac-container');
+    for (let i = 0; i < elements.length; i++) {
+      if (!elements.item(i)) {
+        break;
+      }
+      this.renderer.removeChild(this.document.body, elements.item(i));
+    }
+  }
+
+  onChange = (_: string) => {};
   onTouched = () => {};
 
   writeValue(obj: any): void {

@@ -1,23 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  NgZone,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  Plugins,
-  PushNotification,
-  PushNotificationActionPerformed,
-  PushNotificationToken,
-} from '@capacitor/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { IDriverTransport } from '../../store/models/drive.transport.model';
 import { IRideTransport } from '../../store/models/ride-transport.model';
 import { Observable } from 'rxjs';
 import { Platform } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
 import { PushNotificationService } from 'src/app/core/services/push-notification.service';
 import { TransportFacade } from '../../store/facades/transport.facade';
 

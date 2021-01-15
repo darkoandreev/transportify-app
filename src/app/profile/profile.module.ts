@@ -1,4 +1,5 @@
 import { AuthModule } from '../auth/auth.module';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -30,5 +31,6 @@ import { SharedModule } from '../shared/shared.module';
     ProfileRatingsListComponent,
     ProfileRatingModalComponent,
   ],
+  providers: [CallNumber],
 })
 export class ProfilePageModule {}

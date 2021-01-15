@@ -1,11 +1,10 @@
 import * as fromActions from '../actions/transports.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { TransportService } from '../services/transports.service';
 
 @Injectable()
@@ -13,7 +12,6 @@ export class TransportEffect {
   constructor(
     private actions$: Actions,
     private transportService: TransportService,
-    private router: Router,
     private modalCtrl: ModalController
   ) {}
 
@@ -29,6 +27,17 @@ export class TransportEffect {
         )
       )
     )
+  );
+
+  createDriveTransportSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromActions.createDriveTransportSuccess),
+        tap(() => this.modalCtrl.dismiss())
+      ),
+    {
+      dispatch: false,
+    }
   );
 
   getDriveTransports$ = createEffect(() =>

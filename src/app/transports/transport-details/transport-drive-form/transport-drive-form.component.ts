@@ -50,7 +50,6 @@ export class TransportDriveFormComponent {
       driveTransport.transportTime
     ).getMinutes()}`;
     this.submitForm.next(driveTransport);
-    console.log(driveTransport);
   }
 
   navigateToAddVehicle(): void {

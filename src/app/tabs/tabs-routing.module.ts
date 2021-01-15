@@ -10,11 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: 'transports',
-        loadChildren: () => import('../transports/transports.module').then((m) => m.Tab1PageModule),
+        loadChildren: () =>
+          import('../transports/transports.module').then((m) => m.TransportPageModule),
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
+        path: 'notifications',
+        loadChildren: () =>
+          import('../notifications/notifications.module').then((m) => m.NotificationsPageModule),
       },
       {
         path: 'profile',

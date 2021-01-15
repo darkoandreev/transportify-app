@@ -6,11 +6,11 @@
       [distance]="driveTransport?.distance"
     ></app-cities-distance>
   </ion-col>
-  <ion-col size="4">
-    <ion-row class="ion-align-items-center">
-      <span>Chat</span>
+  <ion-col size="4" class="ion-flex-col">
+    <ion-avatar>
       <ion-icon name="chatbubble-ellipses"></ion-icon>
-    </ion-row>
+      <ion-text>Chat</ion-text>
+    </ion-avatar>
   </ion-col>
 </ion-row>
 <ion-card>
@@ -70,7 +70,7 @@
 <ion-row class="avatar-container ion-padding-top">
   <ng-container *ngFor="let applicant of driveTransport?.applicants">
     <ion-col size="4" class="ion-text-center">
-      <ion-avatar [routerLink]="['/tabs/profile/rating', applicant.rider.id]">
+      <ion-avatar [routerLink]="['/tabs/profile', applicant.rider.username]">
         <ion-icon *ngIf="!applicant.rider.imageUrl" name="camera"></ion-icon>
         <img *ngIf="applicant.rider.imageUrl" [src]="applicant.rider.imageUrl" />
       </ion-avatar>

@@ -1,15 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
-import {
-  Plugins,
-  PushNotification,
-  PushNotificationActionPerformed,
-  PushNotificationToken,
-} from '@capacitor/core';
+import { NavController, Platform } from '@ionic/angular';
+import { Plugins, PushNotification } from '@capacitor/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 const { PushNotifications } = Plugins;
@@ -19,8 +13,8 @@ export class PushNotificationService {
   constructor(
     private http: HttpClient,
     private ngZone: NgZone,
-    private router: Router,
-    private platform: Platform
+    private platform: Platform,
+    private navCtrl: NavController
   ) {}
 
   createToken(token: string): Observable<void> {
@@ -44,7 +38,7 @@ export class PushNotificationService {
     }
     PushNotifications.addListener('pushNotificationActionPerformed', (action: any) => {
       this.ngZone.run(() => {
-        this.router.navigate([action.notification.data.returnUrl]);
+        this.navCtrl.navigateRoot([action.notification.data.returnUrl]);
       });
     });
   }

@@ -28,8 +28,8 @@ export class AuthFacade {
     this.store.dispatch(fromActions.logOut());
   }
 
-  getUserDetails(): void {
-    this.store.dispatch(fromActions.getUserDetails());
+  getUserDetails(username?: string): void {
+    this.store.dispatch(fromActions.getUserDetails({ username }));
   }
 
   getUser(): Promise<IUser> {

@@ -19,4 +19,6 @@ export class ProfileDetailsComponent {
   @Input() user: IUser;
 
   @Output() logOutChange = new EventEmitter<void>();
+  @Output() navigateToRatingChange = new EventEmitter<number>();
+  @Output() phoneCallChange = new EventEmitter<string>();
 }

@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'rating/:userId',
     component: ProfileRatingComponent,
   },
+  {
+    path: ':username',
+    component: ProfilePage,
+  },
 ];
 
 @NgModule({

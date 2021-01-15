@@ -37,7 +37,7 @@
       </ion-row>
     </ion-card>
   </ion-row>
-  <ion-row routerLink="rating">
+  <ion-row (click)="navigateToRatingChange.emit(user.id)">
     <ion-card>
       <ion-row>
         <ion-col class="ion-flex-col" size="1">
@@ -50,7 +50,7 @@
       </ion-row>
     </ion-card>
   </ion-row>
-  <ion-row>
+  <ion-row (click)="phoneCallChange.emit(user?.phoneNumber)">
     <ion-card>
       <ion-row>
         <ion-col class="ion-flex-col" size="1">

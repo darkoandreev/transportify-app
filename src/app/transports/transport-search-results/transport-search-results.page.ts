@@ -14,7 +14,10 @@ export class TransportSearchResultsPage {
   constructor(private route: ActivatedRoute, private transportFacade: TransportFacade) {}
 
   ionViewWillEnter(): void {
-    this.rideTransport = this.route.snapshot.queryParams;
+    const rideTransportParams = this.route.snapshot?.queryParams;
+    if (Object.keys(rideTransportParams).length > 0) {
+      this.rideTransport = this.route.snapshot.queryParams;
+    }
   }
 
   ionViewWillLeave(): void {

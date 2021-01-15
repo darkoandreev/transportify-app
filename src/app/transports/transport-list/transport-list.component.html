@@ -1,16 +1,23 @@
 <ion-list class="animate__animated animate__slideInUp animate__fast">
-  <ion-item-sliding *ngFor="let transport of transports">
-    <ion-item>
-      <app-transport-list-item
-        [type]="type"
-        [transport]="transport"
-        (click)="itemClicked.emit(transport)"
-      ></app-transport-list-item>
-    </ion-item>
-    <ion-item-options side="end">
-      <ion-item-option (click)="deleteChange.emit(transport.id)" color="danger"
-        >Delete</ion-item-option
-      >
-    </ion-item-options>
-  </ion-item-sliding>
+  <ng-container *ngIf="transports?.length; else noTransports">
+    <ion-item-sliding *ngFor="let transport of transports">
+      <ion-item>
+        <app-transport-list-item
+          [type]="type"
+          [transport]="transport"
+          (click)="itemClicked.emit(transport)"
+        ></app-transport-list-item>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteChange.emit(transport.id)" color="danger"
+          >Delete</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-container>
+  <ng-template #noTransports>
+    <div class="empty-list-container">
+      <ion-text>No transports found</ion-text>
+    </div>
+  </ng-template>
 </ion-list>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-cities-distance',
@@ -6,14 +6,10 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./cities-distance.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CitiesDistanceComponent implements OnInit {
+export class CitiesDistanceComponent {
   @Input() cityFrom: string;
 
   @Input() cityTo: string;
 
   @Input() distance: string;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

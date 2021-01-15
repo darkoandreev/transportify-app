@@ -1,25 +1,29 @@
 <ion-card>
   <ion-grid>
     <ion-row>
-      <ion-col size="4">
-        <ion-badge color="primary">
-          {{ type === 'RIDE' ? 'Ще се возя' : 'Ще карам' }}
-        </ion-badge>
+      <ion-col size="3" class="ion-flex-col">
+        <ion-row>
+          <ion-avatar>
+            <ion-icon [name]="type === 'RIDE' ? 'person' : 'car'"></ion-icon>
+          </ion-avatar>
+        </ion-row>
+        <ion-row *ngIf="type === 'RIDE'" class="ion-text-center ion-justify-content-center">
+          <ion-row class="ion-text-center ion-justify-content-center"
+            ><strong>{{ transport.transportDate | date }}</strong></ion-row
+          >
+          <ion-row class="ion-text-center ion-justify-content-center">Дата</ion-row>
+        </ion-row>
       </ion-col>
-      <ion-col size="8">
-        <ion-row>
-          <ion-text class="city-name">{{ transport.cityFrom }}</ion-text>
-        </ion-row>
-        <ion-row>
-          <ion-text class="distance">{{ transport.distance }}</ion-text>
-        </ion-row>
-        <ion-row>
-          <ion-text class="city-name">{{ transport.cityTo }}</ion-text>
-        </ion-row>
+      <ion-col size="9" class="ion-flex-col">
+        <app-cities-distance
+          [cityFrom]="transport?.cityFrom"
+          [cityTo]="transport?.cityTo"
+          [distance]="transport?.distance"
+        ></app-cities-distance>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
-      <ion-col size="3">
+      <ion-col size="3" *ngIf="type === 'DRIVE'">
         <ion-row class="ion-text-center ion-justify-content-center"
           ><strong>{{ transport.transportDate | date }}</strong></ion-row
         >

@@ -44,7 +44,10 @@ export const updateUserDetailsFailed = createAction(
 );
 
 // GET USER DETAILS
-export const getUserDetails = createAction('[Profile Page] Get user details');
+export const getUserDetails = createAction(
+  '[Profile Page] Get user details',
+  props<{ username: string }>()
+);
 export const getUserDetailsSuccess = createAction(
   '[Profile Page] Get user details Success',
   props<{ user: IUser }>()

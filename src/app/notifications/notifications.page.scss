@@ -1,0 +1,23 @@
+.list-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #0058a1;
+
+  ion-text,
+  ion-icon {
+    color: white;
+  }
+
+  ion-text {
+    font-weight: bold;
+    font-size: 1rem;
+    padding-right: 1rem;
+  }
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}

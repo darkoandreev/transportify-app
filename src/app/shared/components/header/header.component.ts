@@ -17,5 +17,5 @@ export class HeaderComponent {
 
   @Input() title: string;
 
-  @Output() endButtonClicked = new EventEmitter<void>();
+  @Output() endButtonClicked = new EventEmitter<Event>();
 }

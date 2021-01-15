@@ -15,5 +15,7 @@
   <app-profile-details
     [user]="user$ | async"
     (logOutChange)="authFacade.logOut()"
+    (navigateToRatingChange)="navigateToRating($event)"
+    (phoneCallChange)="phoneCall($event)"
   ></app-profile-details>
 </ion-content>

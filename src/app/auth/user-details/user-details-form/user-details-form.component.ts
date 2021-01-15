@@ -100,7 +100,6 @@ export class UserDetailsFormComponent {
     );
 
     const imageName = `${new Date().getTime()}_avatar_image.${capturedPhoto.format}`;
-    console.log(imageName);
     this.fileUploadResponse$ = this.fileStorageService.uploadFile(imageBlob, imageName);
 
     this.userDetailsForm.get('imageUrl').setValue(environment.FILE_URL + imageName);

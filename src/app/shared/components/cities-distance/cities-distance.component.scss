@@ -1,22 +1,29 @@
-.vertical-line-row {
-  padding-left: 0.55rem;
-  padding-top: 0.5rem;
-  align-items: center;
+:host {
+  --font-size: 1rem;
+  --icons-font-size: 1.3rem;
 
-  .vl {
-    border-left: 3px dotted #243656;
-    height: 1.1rem;
+  .vertical-line-row {
+    padding-left: 0.55rem;
+    padding-top: 0.5rem;
+    align-items: center;
+    font-size: var(--font-size);
+
+    .vl {
+      border-left: 3px dotted #243656;
+      height: 1.1rem;
+    }
+
+    span {
+      padding-left: 1rem;
+    }
   }
 
-  span {
-    padding-left: 1rem;
+  ion-icon {
+    font-size: var(--icons-font-size);
   }
-}
 
-ion-icon {
-  font-size: 1.3rem;
-}
-
-.city-text {
-  padding-left: 0.5rem;
+  .city-text {
+    font-size: var(--font-size);
+    padding-left: 0.5rem;
+  }
 }

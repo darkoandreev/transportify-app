@@ -16,7 +16,7 @@
       <ion-col
         size="3"
         class="avatar-container"
-        [routerLink]="['/tabs/profile/rating/', driveTransport.user.id]"
+        [routerLink]="['/tabs/profile/', driveTransport.user.username]"
       >
         <ion-avatar>
           <ion-icon *ngIf="!driveTransport.user.imageUrl" name="camera"></ion-icon>
