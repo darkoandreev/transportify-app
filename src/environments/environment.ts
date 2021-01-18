@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   // API_URL: 'http://localhost:8080/api/',
-  API_URL: 'http://192.168.100.176:8080/api/',
-  FILE_URL: 'http://192.168.100.176:8080/api/file-storage/downloadFile/',
+  API_URL: 'http://192.168.0.100:8080/api/',
+  FILE_URL: 'http://192.168.0.100:8080/api/file-storage/downloadFile/',
 };
 
 /*

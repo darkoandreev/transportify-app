@@ -1,12 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
+import { Plugins, PushNotificationToken } from '@capacitor/core';
 import {
-  Plugins,
-  PushNotification,
-  PushNotificationActionPerformed,
-  PushNotificationToken,
-} from '@capacitor/core';
+  SpeechRecognition,
+  SpeechRecognitionListeningOptions,
+} from '@ionic-native/speech-recognition/ngx';
 
 import { AlertService } from '../shared/services/alert.service';
 import { IDriverTransport } from './store/models/drive.transport.model';
@@ -18,12 +17,21 @@ import { TransportType } from './store/models/enums/transport-type.enum';
 
 const { PushNotifications } = Plugins;
 @Component({
-  selector: 'app-tab1',
+  selector: 'app-transports',
   templateUrl: 'transports.page.html',
   styleUrls: ['transports.page.scss'],
 })
 export class TransportsPage implements OnInit {
   type = TransportType.RIDE;
+
+  private navigationMap = new Map<string[], string>([
+    [
+      ['open notifications', 'open notification', 'go to notification', 'go to notifications'],
+      '/tabs/notifications',
+    ],
+    [['open profile', 'open profiles', 'go to profile', 'go to profiles'], '/tabs/profile'],
+    [['find transport'], 'ride transport modal'],
+  ]);
 
   constructor(
     private modalController: ModalController,
@@ -32,7 +40,8 @@ export class TransportsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
     private paltform: Platform,
-    private pushNotificationService: PushNotificationService
+    private pushNotificationService: PushNotificationService,
+    private speechRecognition: SpeechRecognition
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +50,32 @@ export class TransportsPage implements OnInit {
 
   ionViewWillEnter(): void {
     this.getTransportsBySegmentType();
+  }
+
+  startSpeachRecognition(): void {
+    const options: SpeechRecognitionListeningOptions = {
+      language: 'bg-BG',
+    };
+    this.speechRecognition.startListening().subscribe(
+      (matches: string[]) => {
+        matches.forEach((match, index) => {
+          if (index < 1) {
+            let value = '';
+            this.navigationMap.forEach((_, key) => {
+              if (key.includes(match) && this.navigationMap.get(key)) {
+                value = this.navigationMap.get(key);
+                if (value.includes('modal')) {
+                  this.addNewTransport();
+                }
+              }
+            });
+
+            this.router.navigate([value]);
+          }
+        });
+      },
+      (onerror) => console.log('error:', onerror)
+    );
   }
 
   doRefresh(event: any): void {
@@ -107,6 +142,8 @@ export class TransportsPage implements OnInit {
     if (!this.paltform.is('cordova')) {
       return;
     }
+    this.speechRecognition.requestPermission().then();
+
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting
     PushNotifications.requestPermission().then((result) => {
@@ -121,14 +158,6 @@ export class TransportsPage implements OnInit {
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
       console.log('Push registration success, token: ' + token.value);
       this.pushNotificationService.createToken(token.value).subscribe();
-    });
-
-    PushNotifications.addListener('registrationError', (error: any) => {
-      console.log('Error on registration: ' + JSON.stringify(error));
-    });
-
-    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
-      console.log('Push received: ' + JSON.stringify(notification.data));
     });
   }
 }

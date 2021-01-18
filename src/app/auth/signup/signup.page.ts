@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
 import { AuthFacade } from '../store/facade/auth.facade';
+import { Component } from '@angular/core';
 import { IUser } from '../store/models';
 
 @Component({
@@ -8,10 +7,8 @@ import { IUser } from '../store/models';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage {
   constructor(public authFacade: AuthFacade) {}
-
-  ngOnInit() {}
 
   onSubmit(user: IUser): void {
     this.authFacade.register(user);

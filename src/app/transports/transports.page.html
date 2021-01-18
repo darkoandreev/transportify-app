@@ -19,6 +19,11 @@
 </app-header>
 
 <ion-content [fullscreen]="true">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="startSpeachRecognition()">
+    <ion-fab-button>
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content> </ion-refresher-content>
   </ion-refresher>
