@@ -1,5 +1,7 @@
 ion-list {
   height: 100%;
+  overflow-y: scroll;
+
   ion-item {
     --padding-start: 0;
     --padding-end: 0;

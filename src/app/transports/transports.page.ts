@@ -11,9 +11,12 @@ import { AlertService } from '../shared/services/alert.service';
 import { IDriverTransport } from './store/models/drive.transport.model';
 import { IRideTransport } from './store/models/ride-transport.model';
 import { PushNotificationService } from '../core/services/push-notification.service';
+import { Subject } from 'rxjs';
 import { TransportDetailsComponent } from './transport-details/transport-details.component';
 import { TransportFacade } from './store/facades/transport.facade';
+import { TransportHistoryFacade } from './store/facades/transport-history.facade';
 import { TransportType } from './store/models/enums/transport-type.enum';
+import { takeUntil } from 'rxjs/operators';
 
 const { PushNotifications } = Plugins;
 @Component({
@@ -32,10 +35,12 @@ export class TransportsPage implements OnInit {
     [['open profile', 'open profiles', 'go to profile', 'go to profiles'], '/tabs/profile'],
     [['find transport'], 'ride transport modal'],
   ]);
+  private destroyed$ = new Subject<void>();
 
   constructor(
-    private modalController: ModalController,
     public transportFacade: TransportFacade,
+    public transportHistoryFacade: TransportHistoryFacade,
+    private modalController: ModalController,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
@@ -52,30 +57,38 @@ export class TransportsPage implements OnInit {
     this.getTransportsBySegmentType();
   }
 
+  ionViewWillLeave(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   startSpeachRecognition(): void {
     const options: SpeechRecognitionListeningOptions = {
       language: 'bg-BG',
     };
-    this.speechRecognition.startListening().subscribe(
-      (matches: string[]) => {
-        matches.forEach((match, index) => {
-          if (index < 1) {
-            let value = '';
-            this.navigationMap.forEach((_, key) => {
-              if (key.includes(match) && this.navigationMap.get(key)) {
-                value = this.navigationMap.get(key);
-                if (value.includes('modal')) {
-                  this.addNewTransport();
+    this.speechRecognition
+      .startListening()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
+        (matches: string[]) => {
+          matches.forEach((match, index) => {
+            if (index < 1) {
+              let value = '';
+              this.navigationMap.forEach((_, key) => {
+                if (key.includes(match) && this.navigationMap.get(key)) {
+                  value = this.navigationMap.get(key);
+                  if (value.includes('modal')) {
+                    this.addNewTransport();
+                  }
                 }
-              }
-            });
+              });
 
-            this.router.navigate([value]);
-          }
-        });
-      },
-      (onerror) => console.log('error:', onerror)
-    );
+              this.router.navigate([value]);
+            }
+          });
+        },
+        (onerror) => console.log('error:', onerror)
+      );
   }
 
   doRefresh(event: any): void {
@@ -135,6 +148,8 @@ export class TransportsPage implements OnInit {
       this.transportFacade.getAllDriveTransports();
     } else if (this.type === TransportType.RIDE) {
       this.transportFacade.getAllRideTransports();
+    } else {
+      this.transportHistoryFacade.getAll();
     }
   }
 
@@ -150,14 +165,14 @@ export class TransportsPage implements OnInit {
       if (result.granted) {
         // Register with Apple / Google to receive push via APNS/FCM
         PushNotifications.register();
-      } else {
-        // Show some error
       }
     });
 
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
-      console.log('Push registration success, token: ' + token.value);
-      this.pushNotificationService.createToken(token.value).subscribe();
+      this.pushNotificationService
+        .createToken(token.value)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe();
     });
   }
 }

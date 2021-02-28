@@ -1,7 +1,7 @@
 import * as fromActions from '../actions/ride-transport.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';

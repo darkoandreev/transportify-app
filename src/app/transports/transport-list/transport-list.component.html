@@ -1,4 +1,6 @@
 <ion-list class="animate__animated animate__slideInUp animate__fast">
+  <ion-list-header *ngIf="headerLabel">{{ headerLabel }}</ion-list-header>
+
   <ng-container *ngIf="transports?.length; else noTransports">
     <ion-item-sliding *ngFor="let transport of transports">
       <ion-item>

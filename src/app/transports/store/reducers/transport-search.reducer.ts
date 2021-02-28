@@ -1,15 +1,12 @@
 import * as fromActions from '../actions/transport-search.actions';
 
 import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { ApplicantStatusEnum, IApplicant } from '../models/applicant.model';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import {
-  applyForTransportSuccess,
-  updateApplicantStatusSuccess,
-} from '../actions/transports.actions';
 
+import { ApplicantStatusEnum } from '../models/applicant.model';
 import { IDriverTransport } from '../models/drive.transport.model';
 import { IState } from '.';
+import { applyForTransportSuccess } from '../actions/transports.actions';
 import produce from 'immer';
 
 export interface ITransportSearchResultState extends EntityState<IDriverTransport> {

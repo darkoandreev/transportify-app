@@ -4,10 +4,13 @@
       <ion-col size="3" class="ion-flex-col">
         <ion-row>
           <ion-avatar>
-            <ion-icon [name]="type === 'RIDE' ? 'person' : 'car'"></ion-icon>
+            <ion-icon [name]="iconName"></ion-icon>
           </ion-avatar>
         </ion-row>
-        <ion-row *ngIf="type === 'RIDE'" class="ion-text-center ion-justify-content-center">
+        <ion-row
+          *ngIf="type === 'RIDE' || type === 'HISTORY'"
+          class="ion-text-center ion-justify-content-center"
+        >
           <ion-row class="ion-text-center ion-justify-content-center"
             ><strong>{{ transport.transportDate | date }}</strong></ion-row
           >

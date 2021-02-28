@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { IDriverTransport } from '../../store/models/drive.transport.model';
 import { IRideTransport } from '../../store/models/ride-transport.model';
+import { ITransportHistory } from '../../store/models/transport-history.model';
 import { TransportType } from '../../store/models/enums/transport-type.enum';
 
 @Component({
@@ -11,10 +12,22 @@ import { TransportType } from '../../store/models/enums/transport-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransportListItemComponent implements OnInit {
-  @Input() transport: IRideTransport & IDriverTransport;
+  @Input() transport: IRideTransport & IDriverTransport & ITransportHistory;
   @Input() type: TransportType = TransportType.RIDE;
 
-  constructor() {}
+  iconName: string;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.iconName = this._iconName;
+  }
+
+  private get _iconName(): string {
+    if (this.type === TransportType.RIDE) {
+      return 'person';
+    } else if (this.type === TransportType.DRIVE) {
+      return 'card';
+    } else {
+      return this.transport.drive ? 'car' : 'person';
+    }
+  }
 }

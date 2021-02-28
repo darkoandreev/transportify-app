@@ -31,7 +31,6 @@
     <app-transport-list
       [type]="type"
       [transports]="transportFacade.rideTransports$ | async"
-      headerLabel="Riding"
       (itemClicked)="rideItemClicked($event)"
       (deleteChange)="deleteRideTranport($event)"
       *ngSwitchCase="'RIDE'"
@@ -39,14 +38,14 @@
     <app-transport-list
       [type]="type"
       [transports]="transportFacade.driveTransports$ | async"
-      headerLabel="Driving"
       (itemClicked)="driveItemClicked($event)"
       (deleteChange)="deleteDriveTranport($event)"
       *ngSwitchCase="'DRIVE'"
     ></app-transport-list>
+
     <app-transport-list
       [type]="type"
-      headerLabel="History"
+      [transports]="transportHistoryFacade.transportHistory$ | async"
       *ngSwitchCase="'HISTORY'"
     ></app-transport-list>
   </ng-container>

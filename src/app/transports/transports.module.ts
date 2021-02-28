@@ -7,12 +7,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { RideTransportEffect } from './store/effects/ride-transport.effects';
 import { SharedModule } from '../shared/shared.module';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { StoreModule } from '@ngrx/store';
 import { TransportDetailsModule } from './transport-details/transport-details.module';
 import { TransportEffect } from './store/effects/transport.effects';
+import { TransportHistoryEffect } from './store/effects/transport-history.effects';
 import { TransportListComponent } from './transport-list/transport-list.component';
 import { TransportListItemComponent } from './transport-list/transport-list-item/transport-list-item.component';
 import { TransportPageRoutingModule } from './transports-routing.module';
@@ -29,9 +31,15 @@ import { TransportsPage } from './transports.page';
     FormsModule,
     TransportPageRoutingModule,
     TransportDetailsModule,
+    ReactiveComponentModule,
     SharedModule,
     StoreModule.forFeature('transport', fromReducer.reducerMap),
-    EffectsModule.forFeature([TransportEffect, TransportSearchEffect, RideTransportEffect]),
+    EffectsModule.forFeature([
+      TransportEffect,
+      TransportSearchEffect,
+      RideTransportEffect,
+      TransportHistoryEffect,
+    ]),
   ],
   declarations: [
     TransportsPage,

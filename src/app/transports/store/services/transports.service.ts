@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { IDriverTransport } from '../models/drive.transport.model';
 import { IRideTransport } from '../models/ride-transport.model';
+import { ITransport } from '../models/transport.model';
+import { ITransportHistory } from '../models/transport-history.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -91,5 +93,11 @@ export class TransportService {
       applicant,
       { withCredentials: true }
     );
+  }
+
+  getHistory(): Observable<ITransportHistory[]> {
+    return this.http.get<ITransportHistory[]>(`${environment.API_URL}transport-history`, {
+      withCredentials: true,
+    });
   }
 }

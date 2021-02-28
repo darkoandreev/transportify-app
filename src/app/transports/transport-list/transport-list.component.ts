@@ -10,6 +10,7 @@ import {
 
 import { IDriverTransport } from '../store/models/drive.transport.model';
 import { IRideTransport } from '../store/models/ride-transport.model';
+import { ITransportHistory } from '../store/models/transport-history.model';
 import { TransportType } from '../store/models/enums/transport-type.enum';
 
 @Component({
@@ -19,7 +20,7 @@ import { TransportType } from '../store/models/enums/transport-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransportListComponent {
-  @Input() transports: IRideTransport[] & IDriverTransport[];
+  @Input() transports: IRideTransport[] & IDriverTransport[] & ITransportHistory[];
 
   @Input() type: TransportType = TransportType.RIDE;
 

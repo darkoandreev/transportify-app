@@ -1,10 +1,9 @@
 import * as fromActions from '../actions/transports.actions';
 
 import { Action, createReducer, on } from '@ngrx/store';
-import { ApplicantStatusEnum, IApplicant } from '../models/applicant.model';
 
+import { IApplicant } from '../models/applicant.model';
 import { IDriverTransport } from '../models/drive.transport.model';
-import { IRideTransport } from '../models/ride-transport.model';
 import produce from 'immer';
 
 export interface ITransportState {
