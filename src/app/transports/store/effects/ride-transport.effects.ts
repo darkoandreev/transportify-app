@@ -72,7 +72,13 @@ export class RideTransportEffect {
       this.actions$.pipe(
         ofType(fromActions.createRideTransportSuccess),
         tap(({ transport }) => {
-          this.router.navigate(['tabs/transports/results/', transport.id]);
+          this.router.navigate(['tabs/transports/results/', transport.id], {
+            queryParams: {
+              cityFrom: transport.cityFrom,
+              cityTo: transport.cityTo,
+              transportDate: transport.transportDate,
+            },
+          });
           this.modalCtrl.dismiss();
         })
       ),

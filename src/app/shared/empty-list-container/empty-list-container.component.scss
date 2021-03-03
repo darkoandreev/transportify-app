@@ -1,0 +1,13 @@
+.empty-list-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-text {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0.3;
+    text-align: center;
+  }
+}

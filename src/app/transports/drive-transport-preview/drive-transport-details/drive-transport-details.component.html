@@ -77,15 +77,21 @@
       {{ applicant.rider.firstName }} {{ applicant.rider.lastName }}
       <ion-badge
         [color]="
-          applicant.applicantStatus === 'PENDING'
+          applicant.applicantStatus === applicantStatus.PENDING
             ? 'warning'
-            : applicant.applicantStatus === 'REJECTED'
+            : applicant.applicantStatus === applicantStatus.REJECTED
             ? 'danger'
             : 'success'
         "
         >{{ applicant.applicantStatus }}</ion-badge
       >
-      <div class="actions-container" *ngIf="applicant.applicantStatus === 'PENDING'">
+      <div
+        class="actions-container"
+        *ngIf="
+          applicant.applicantStatus === applicantStatus.PENDING &&
+          driveTransport.user.id === user?.id
+        "
+      >
         <ion-button
           (click)="updateApplicantStatus(applicant, applicantStatus.ACCEPTED)"
           fill="clear"

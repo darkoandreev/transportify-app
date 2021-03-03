@@ -16,13 +16,14 @@ import { VehicleFacade } from 'src/app/vehicle/store/facades/vehicle.facade';
 export class TransportDetailsComponent implements OnInit {
   vehicles$: Observable<IVehicle[]> = this.vehicleFacade.vehicles$;
   type = 'ride';
+
   constructor(
     public modalController: ModalController,
     private vehicleFacade: VehicleFacade,
     private transportFacade: TransportFacade
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.vehicleFacade.getVehicles();
   }
 

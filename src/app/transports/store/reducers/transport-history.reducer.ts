@@ -4,7 +4,6 @@ import { Action, createFeatureSelector, createReducer, createSelector, on } from
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 import { IState } from '.';
-import { ITransport } from '../models/transport.model';
 import { ITransportHistory } from '../models/transport-history.model';
 
 export interface ITransportHistoryState extends EntityState<ITransportHistory> {

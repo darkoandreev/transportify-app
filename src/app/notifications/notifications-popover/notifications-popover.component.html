@@ -1,4 +1,12 @@
 <ion-list>
-  <ion-button>Mark all as read</ion-button>
-  <ion-button>Mark all as unread</ion-button>
+  <ion-button
+    expand="full"
+    (click)="popoverController.dismiss({ ids: nonReadNotificationIds, isRead: true })"
+    >Mark all as read</ion-button
+  >
+  <ion-button
+    expand="full"
+    (click)="popoverController.dismiss({ ids: readNotificationIds, isRead: false })"
+    >Mark all as unread</ion-button
+  >
 </ion-list>

@@ -1,7 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { Component } from '@angular/core';
 import { IApplicant } from '../store/models/applicant.model';
 import { IDriverTransport } from '../store/models/drive.transport.model';
+import { IUser } from 'src/app/auth/store/models';
 import { Observable } from 'rxjs';
 import { PushNotificationService } from 'src/app/core/services/push-notification.service';
 import { TransportFacade } from '../store/facades/transport.facade';
@@ -13,8 +15,10 @@ import { TransportFacade } from '../store/facades/transport.facade';
 })
 export class DriveTransportPreviewComponent {
   driveTransport$: Observable<IDriverTransport> = this.transportFacade.driveTransport$;
+  user$: Promise<IUser>;
 
   constructor(
+    public authService: AuthService,
     private transportFacade: TransportFacade,
     private route: ActivatedRoute,
     private pushNotificationService: PushNotificationService
@@ -22,6 +26,7 @@ export class DriveTransportPreviewComponent {
 
   ionViewWillEnter(): void {
     const driveTransportId = +this.route.snapshot.paramMap.get('id');
+    this.user$ = this.authService.getUser();
 
     if (!driveTransportId) {
       return;

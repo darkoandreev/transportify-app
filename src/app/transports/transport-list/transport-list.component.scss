@@ -7,18 +7,4 @@ ion-list {
     --padding-end: 0;
     --inner-padding-end: 0;
   }
-
-  .empty-list-container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    ion-text {
-      font-size: 3rem;
-      font-weight: bold;
-      opacity: 0.3;
-      text-align: center;
-    }
-  }
 }

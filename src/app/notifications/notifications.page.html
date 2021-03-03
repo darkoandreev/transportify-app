@@ -12,5 +12,8 @@
 </app-header>
 
 <ion-content [fullscreen]="true">
-  <app-my-notifications-list></app-my-notifications-list>
+  <app-my-notifications-list
+    [notifications]="notificationFacade.notifications$ | async"
+    (notificationClick)="onNotificationClick($event)"
+  ></app-my-notifications-list>
 </ion-content>

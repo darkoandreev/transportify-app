@@ -39,6 +39,10 @@ export class ProfileRatingComponent {
     await modal.present();
     const { data } = await modal.onDidDismiss();
 
+    if (!data) {
+      return;
+    }
+
     const userRate: IRateUserRequest = {
       ratedUserId: +this.ratedUserId,
       comment: data.comment,

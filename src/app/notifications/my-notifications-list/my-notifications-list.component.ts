@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { INotification } from '../store/models/notifications.model';
 
 @Component({
   selector: 'app-my-notifications-list',
@@ -6,8 +8,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./my-notifications-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyNotificationsListComponent implements OnInit {
-  constructor() {}
+export class MyNotificationsListComponent {
+  @Input() notifications: INotification[];
 
-  ngOnInit() {}
+  @Output() notificationClick = new EventEmitter<number>();
 }

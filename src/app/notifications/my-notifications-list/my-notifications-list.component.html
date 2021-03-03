@@ -1,20 +1,31 @@
-<ion-list>
+<ion-list *ngIf="notifications?.length; else emptyNotificationsList">
   <ion-card
-    *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index"
-    [class.read-notification-card]="i % 2 === 0"
+    *ngFor="let notification of notifications"
+    (click)="!notification.isRead ? notificationClick.emit(notification.id) : null"
+    [class.read-notification-card]="!notification.isRead"
+    [routerLink]="['/' + notification.returnUrl]"
   >
     <ion-grid>
       <ion-row class="ion-justify-content-between ion-align-items-center">
         <ion-text>
-          <h3><strong>12.01.2021 15:34</strong></h3>
+          <h3>
+            <strong>{{ notification.title }}</strong>
+          </h3>
         </ion-text>
-        <ion-icon
-          [name]="i % 2 === 0 ? 'search-outline' : 'notifications-circle-outline'"
-        ></ion-icon>
+        <ion-icon name="notifications-circle-outline"></ion-icon>
       </ion-row>
       <ion-row>
-        <ion-text>Може да кандидатствате за новата обява</ion-text>
+        <ion-text
+          ><strong>{{ notification.message }}</strong></ion-text
+        >
+      </ion-row>
+      <ion-row>
+        <ion-text>{{ notification.createdAt | date: 'short' }}</ion-text>
       </ion-row>
     </ion-grid>
   </ion-card>
 </ion-list>
+
+<ng-template #emptyNotificationsList>
+  <app-empty-list-container text="No new notifications"></app-empty-list-container>
+</ng-template>

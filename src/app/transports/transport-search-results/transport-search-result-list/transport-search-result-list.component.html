@@ -4,6 +4,7 @@
       <app-transport-search-result-list-item
         *ngFor="let driveTransport of driveTransports"
         [driveTransport]="driveTransport"
+        [routerLink]="['/tabs', 'transports', 'drive-transport', driveTransport.id]"
         (apply)="applyForTransport($event)"
       ></app-transport-search-result-list-item>
     </ng-container>

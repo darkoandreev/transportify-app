@@ -2,6 +2,7 @@ import { ApplicantStatusEnum, IApplicant } from '../../store/models/applicant.mo
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { IDriverTransport } from '../../store/models/drive.transport.model';
+import { IUser } from 'src/app/auth/store/models';
 
 @Component({
   selector: 'app-drive-transport-details',
@@ -13,6 +14,7 @@ export class DriveTransportDetailsComponent {
   readonly applicantStatus = ApplicantStatusEnum;
 
   @Input() driveTransport: IDriverTransport;
+  @Input() user: IUser;
 
   @Output() updateStatus = new EventEmitter<IApplicant>();
   @Output() rejectApplicant = new EventEmitter<IApplicant>();

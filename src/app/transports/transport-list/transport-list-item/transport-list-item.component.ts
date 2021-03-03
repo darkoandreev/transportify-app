@@ -25,7 +25,7 @@ export class TransportListItemComponent implements OnInit {
     if (this.type === TransportType.RIDE) {
       return 'person';
     } else if (this.type === TransportType.DRIVE) {
-      return 'card';
+      return 'car';
     } else {
       return this.transport.drive ? 'car' : 'person';
     }

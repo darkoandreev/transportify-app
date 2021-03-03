@@ -9,6 +9,7 @@
     <app-drive-transport-details
       (updateStatus)="updateApplicantStatus($event)"
       [driveTransport]="driveTransport$ | async"
+      [user]="user$ | async"
     ></app-drive-transport-details>
   </ion-grid>
 </ion-content>
