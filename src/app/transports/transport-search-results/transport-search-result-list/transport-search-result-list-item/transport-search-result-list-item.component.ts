@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { IDriverTransport } from 'src/app/transports/store/models/drive.transport.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-transport-search-result-list-item',
@@ -24,8 +25,10 @@ export class TransportSearchResultListItemComponent {
   }
 
   @Output() apply = new EventEmitter<IDriverTransport>();
+  @Output() cancelRide = new EventEmitter<IApplicant>();
 
   readonly applicantStatus = ApplicantStatusEnum;
+  readonly env = environment;
   isAlreadyApplied$: Promise<boolean>;
   applicant$: Promise<IApplicant>;
 
@@ -37,7 +40,8 @@ export class TransportSearchResultListItemComponent {
     const appl = await applicant;
     return (
       appl?.applicantStatus === ApplicantStatusEnum.PENDING ||
-      appl?.applicantStatus === ApplicantStatusEnum.ACCEPTED
+      appl?.applicantStatus === ApplicantStatusEnum.ACCEPTED ||
+      appl?.applicantStatus === ApplicantStatusEnum.CANCELED
     );
   }
 

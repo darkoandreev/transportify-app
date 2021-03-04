@@ -1,11 +1,14 @@
+import { ApplicantStatusEnum, IApplicant } from '../store/models/applicant.model';
+
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/store/services/auth.service';
 import { Component } from '@angular/core';
-import { IApplicant } from '../store/models/applicant.model';
 import { IDriverTransport } from '../store/models/drive.transport.model';
 import { IUser } from 'src/app/auth/store/models';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { PushNotificationService } from 'src/app/core/services/push-notification.service';
+import { TransportChatComponent } from '../transport-chat/transport-chat.component';
 import { TransportFacade } from '../store/facades/transport.facade';
 
 @Component({
@@ -21,7 +24,8 @@ export class DriveTransportPreviewComponent {
     public authService: AuthService,
     private transportFacade: TransportFacade,
     private route: ActivatedRoute,
-    private pushNotificationService: PushNotificationService
+    private pushNotificationService: PushNotificationService,
+    private modalController: ModalController
   ) {}
 
   ionViewWillEnter(): void {
@@ -43,5 +47,19 @@ export class DriveTransportPreviewComponent {
 
   updateApplicantStatus(applicant: IApplicant): void {
     this.transportFacade.updateApplicantStatus(applicant);
+  }
+
+  async onChatOpen(driveTransport: IDriverTransport) {
+    driveTransport = {
+      ...driveTransport,
+      applicants: driveTransport.applicants.filter(
+        (applicant) => applicant.applicantStatus === ApplicantStatusEnum.ACCEPTED
+      ),
+    };
+    const modal = await this.modalController.create({
+      component: TransportChatComponent,
+      componentProps: { driveTransport },
+    });
+    return await modal.present();
   }
 }

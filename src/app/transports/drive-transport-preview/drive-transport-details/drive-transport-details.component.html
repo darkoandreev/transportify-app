@@ -6,7 +6,12 @@
       [distance]="driveTransport?.distance"
     ></app-cities-distance>
   </ion-col>
-  <ion-col size="4" class="ion-flex-col">
+  <ion-col
+    size="4"
+    class="ion-flex-col"
+    (click)="openChat.emit(driveTransport)"
+    *ngIf="currentApplicant?.applicantStatus === applicantStatus.ACCEPTED"
+  >
     <ion-avatar>
       <ion-icon name="chatbubble-ellipses"></ion-icon>
       <ion-text>Chat</ion-text>
@@ -18,7 +23,7 @@
     <ion-col class="ion-flex-col" size="1">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-col>
-    <ion-col class="ion-flex-col" size="3"> Дата </ion-col>
+    <ion-col class="ion-flex-col" size="3"> Date </ion-col>
     <ion-col class="ion-flex-col" size="8">
       {{ driveTransport?.transportDate | date }}
     </ion-col>
@@ -29,7 +34,7 @@
     <ion-col class="ion-flex-col" size="1">
       <ion-icon name="time-outline"></ion-icon>
     </ion-col>
-    <ion-col class="ion-flex-col" size="6"> Час на тръгване </ion-col>
+    <ion-col class="ion-flex-col" size="6">Departure time</ion-col>
     <ion-col class="ion-flex-col" size="4">
       {{ driveTransport?.transportTime }}
     </ion-col>
@@ -72,14 +77,15 @@
     <ion-col size="4" class="ion-text-center">
       <ion-avatar [routerLink]="['/tabs/profile', applicant.rider.username]">
         <ion-icon *ngIf="!applicant.rider.imageUrl" name="camera"></ion-icon>
-        <img *ngIf="applicant.rider.imageUrl" [src]="applicant.rider.imageUrl" />
+        <img *ngIf="applicant.rider.imageUrl" [src]="env.FILE_URL + applicant.rider.imageUrl" />
       </ion-avatar>
       {{ applicant.rider.firstName }} {{ applicant.rider.lastName }}
       <ion-badge
         [color]="
           applicant.applicantStatus === applicantStatus.PENDING
             ? 'warning'
-            : applicant.applicantStatus === applicantStatus.REJECTED
+            : applicant.applicantStatus === applicantStatus.REJECTED ||
+              applicant.applicantStatus === applicantStatus.CANCELED
             ? 'danger'
             : 'success'
         "

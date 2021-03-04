@@ -1,0 +1,15 @@
+<app-header
+  [showStartButtons]="false"
+  title="Confirm account"
+  endButtonIcon="close-outline"
+></app-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="authFacade.confirmAccount(confirmationToken)" class="ion-blue-button"
+        >Confirm your account</ion-button
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['profile.page.scss'],
 })
 export class ProfilePage {
+  readonly env = environment;
   user$: Observable<IUser> = this.authFacade.userDetails$;
   fileUrl: string = environment.FILE_URL;
 

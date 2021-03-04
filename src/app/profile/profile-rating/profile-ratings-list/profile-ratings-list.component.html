@@ -1,7 +1,7 @@
 <ng-container *ngIf="userRatings?.length; else emptyRatings">
   <ion-item *ngFor="let rating of userRatings">
     <ion-avatar slot="start">
-      <img [src]="rating.id.raterUser.imageUrl" />
+      <img [src]="env.FILE_URL + rating.id.raterUser.imageUrl" />
     </ion-avatar>
     <ion-label>
       <h3>{{ rating.id.raterUser.firstName }} {{ rating.id.raterUser.lastName }}</h3>

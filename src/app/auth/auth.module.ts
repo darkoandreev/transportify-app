@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthEffect } from './store/effects/auth.effects';
 import { AuthRoutingModule } from './auth-routing.module';
 import { CommonModule } from '@angular/common';
+import { ConfirmAccountPage } from './confirm-account/confirm-account.page';
 import { EffectsModule } from '@ngrx/effects';
 import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login/login.page';
@@ -35,6 +36,7 @@ import { reducerMap } from './store/reducers';
     SignupFormComponent,
     UserDetailsComponent,
     UserDetailsFormComponent,
+    ConfirmAccountPage,
   ],
 })
 export class AuthModule {}

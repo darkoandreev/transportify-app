@@ -7,7 +7,7 @@
   <ion-row class="ion-justify-content-center avatar-container">
     <p>{{ user?.firstName }} {{ user?.lastName }}</p>
     <ion-avatar>
-      <img [src]="user.imageUrl" />
+      <img [src]="env.FILE_URL + user.imageUrl" />
     </ion-avatar>
   </ion-row>
 </ng-container>

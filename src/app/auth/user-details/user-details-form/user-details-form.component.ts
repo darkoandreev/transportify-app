@@ -45,6 +45,7 @@ export class UserDetailsFormComponent {
 
   userDetailsForm: FormGroup;
   fileUploadResponse$: Observable<IUploadFileResponse>;
+  readonly env = environment;
 
   private _user: IUser;
 
@@ -60,16 +61,16 @@ export class UserDetailsFormComponent {
 
   async openCameraOptions() {
     const actionSheet = await this.actionSheet.create({
-      header: 'Opcije',
+      header: 'Options',
       cssClass: 'stc-action-sheet',
       buttons: [
         {
-          text: 'Album',
+          text: 'Gallery',
           icon: 'image',
           handler: async () => await this.captureInventory(CameraSource.Photos),
         },
         {
-          text: 'Kamera',
+          text: 'Camera',
           icon: 'camera',
           handler: async () => await this.captureInventory(CameraSource.Camera),
         },
@@ -102,7 +103,7 @@ export class UserDetailsFormComponent {
     const imageName = `${new Date().getTime()}_avatar_image.${capturedPhoto.format}`;
     this.fileUploadResponse$ = this.fileStorageService.uploadFile(imageBlob, imageName);
 
-    this.userDetailsForm.get('imageUrl').setValue(environment.FILE_URL + imageName);
+    this.userDetailsForm.get('imageUrl').setValue(imageName);
     this.cdr.markForCheck();
   }
 

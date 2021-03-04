@@ -7,6 +7,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { from } from 'rxjs';
 
@@ -18,7 +19,8 @@ export class AuthEffect {
     private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute,
-    private storage: Storage
+    private storage: Storage,
+    private loadingController: LoadingController
   ) {}
 
   login$ = createEffect(() =>
@@ -57,11 +59,39 @@ export class AuthEffect {
     )
   );
 
+  confirmAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.confirmAccount),
+      switchMap(({ confirmationToken }) =>
+        this.authService.confirmAccount(confirmationToken).pipe(
+          map((user) => fromActions.confirmAccountSuccess({ user })),
+          catchError((error) => [fromActions.confirmAccountFailed(error)])
+        )
+      )
+    )
+  );
+
+  confirmAccountSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromActions.confirmAccountSuccess),
+        tap(() => {
+          this.alertService.confirmAlert(
+            'Your account has been confirmed!',
+            'Go to login screen',
+            () => this.router.navigate(['auth/login'])
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   signUpSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(fromActions.signUpSuccess),
         tap(() => {
+          this.loadingController.dismiss();
           this.alertService.confirmAlert(
             'Confirm account',
             'Please check your email and activate your account!',

@@ -40,11 +40,11 @@ export class TransportsPage implements OnInit {
   constructor(
     public transportFacade: TransportFacade,
     public transportHistoryFacade: TransportHistoryFacade,
+    public paltform: Platform,
     private modalController: ModalController,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
-    private paltform: Platform,
     private pushNotificationService: PushNotificationService,
     private speechRecognition: SpeechRecognition
   ) {}

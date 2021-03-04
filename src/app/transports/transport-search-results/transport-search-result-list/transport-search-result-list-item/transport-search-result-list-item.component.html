@@ -5,10 +5,29 @@
       *ngIf="applicant$ | async as applicant"
     >
       <ion-badge
-        [color]="applicant?.applicantStatus === applicantStatus.PENDING ? 'warning' : 'success'"
+        [color]="
+          applicant?.applicantStatus === applicantStatus.PENDING
+            ? 'warning'
+            : applicant?.applicantStatus === applicantStatus.CANCELED
+            ? 'danger'
+            : 'success'
+        "
         >{{
-          applicant?.applicantStatus === applicantStatus.PENDING ? 'Pending' : 'Accepted'
+          applicant?.applicantStatus === applicantStatus.PENDING
+            ? 'Pending'
+            : applicant?.applicantStatus === applicantStatus.CANCELED
+            ? 'Canceled'
+            : 'Accepted'
         }}</ion-badge
+      >
+      <ion-button
+        *ngIf="
+          applicant?.applicantStatus === applicantStatus.ACCEPTED &&
+          applicant?.applicantStatus !== applicantStatus.CANCELED
+        "
+        (click)="cancelRide.emit(applicant); $event.preventDefault(); $event.stopPropagation()"
+        color="danger"
+        >Cancel</ion-button
       >
       <ion-text class="ion-big-text">{{ driveTransport.transportPrice }} лв.</ion-text>
     </ion-row>
@@ -20,7 +39,10 @@
       >
         <ion-avatar>
           <ion-icon *ngIf="!driveTransport.user.imageUrl" name="camera"></ion-icon>
-          <img *ngIf="driveTransport.user.imageUrl" [src]="driveTransport.user.imageUrl" />
+          <img
+            *ngIf="driveTransport.user.imageUrl"
+            [src]="env.FILE_URL + driveTransport.user.imageUrl"
+          />
         </ion-avatar>
       </ion-col>
       <ion-col size="7">
@@ -76,13 +98,13 @@
         <ion-row
           ><strong>{{ driveTransport.transportDate | date }}</strong></ion-row
         >
-        <ion-row>Дата</ion-row>
+        <ion-row>Date</ion-row>
       </ion-col>
       <ion-col size="2" class="ion-flex-col">
         <ion-row
           ><strong>{{ driveTransport.transportTime }}</strong></ion-row
         >
-        <ion-row>Час</ion-row>
+        <ion-row>Hour</ion-row>
       </ion-col>
       <ion-col size="5" class="ion-flex-col">
         <ion-row

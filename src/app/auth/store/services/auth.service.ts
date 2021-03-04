@@ -43,6 +43,16 @@ export class AuthService {
     });
   }
 
+  confirmAccount(confirmationToken: string): Observable<IUser> {
+    console.log(confirmationToken);
+    const params = new HttpParams().set('confirmationToken', confirmationToken);
+
+    return this.http.get<IUser>(`${environment.API_URL}user/confirm-account`, {
+      params,
+      withCredentials: true,
+    });
+  }
+
   isRegistrationFinished(user: IUser): boolean {
     return !!(
       user.firstName &&

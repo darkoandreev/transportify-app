@@ -12,6 +12,9 @@ import { PopoverController } from '@ionic/angular';
 export class NotificationsPopoverComponent {
   @Input()
   set notifications(values: INotification[]) {
+    if (!values?.length) {
+      return;
+    }
     this.readNotificationIds = values
       .filter((notification) => notification.isRead)
       .map((notif) => notif.id);

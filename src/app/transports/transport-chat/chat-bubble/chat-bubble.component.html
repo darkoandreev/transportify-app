@@ -1,0 +1,14 @@
+<div class="chat-bubble-container">
+  <ion-avatar
+    [class.right]="chatMessage.type === 'MSG_REQ'"
+    [class.left]="chatMessage.type === 'MSG_RES'"
+  >
+    <img [src]="chatMessage.image" />
+  </ion-avatar>
+  <div class="chat-bubble {{ chatMessage.type === 'MSG_REQ' ? 'right' : 'left' }}">
+    <div class="message">{{ chatMessage.message }}</div>
+    <div class="message-detail" style="float: right">
+      <span>14.11.2020</span>
+    </div>
+  </div>
+</div>

@@ -56,3 +56,16 @@ export const getUserDetailsFailed = createAction(
   '[Profile Page] Get user details Failed',
   props<{ error: IAuthError }>()
 );
+
+export const confirmAccount = createAction(
+  '[Confirm account] Confirm your account',
+  props<{ confirmationToken: string }>()
+);
+export const confirmAccountSuccess = createAction(
+  '[Confirm account] Confirm your account success',
+  props<{ user: IUser }>()
+);
+export const confirmAccountFailed = createAction(
+  '[Confirm account] Confirm your account failed',
+  (error: Error) => ({ error })
+);

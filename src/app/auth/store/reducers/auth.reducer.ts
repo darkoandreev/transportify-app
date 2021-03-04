@@ -51,6 +51,10 @@ const featureReducer = createReducer(
     ...state,
     userDetails: user,
   }))
+  // on(fromActions.confirmAccountSuccess, (state) => ({
+  //   ...state,
+  //   isAuthenticated: true
+  // }))
 );
 
 export function userReducer(state: IUserState | undefined, action: Action) {

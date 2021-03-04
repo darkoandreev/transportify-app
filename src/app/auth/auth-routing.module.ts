@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
+import { ConfirmAccountPage } from './confirm-account/confirm-account.page';
 import { LoginGuard } from './guards/login.guard';
 import { LoginPage } from './login/login.page';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,10 @@ const routes: Routes = [
         component: UserDetailsComponent,
       },
     ],
+  },
+  {
+    path: 'confirm-account',
+    component: ConfirmAccountPage,
   },
 ];
 

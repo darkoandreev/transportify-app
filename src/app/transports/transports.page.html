@@ -19,7 +19,13 @@
 </app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="startSpeachRecognition()">
+  <ion-fab
+    *ngIf="paltform.is('cordova')"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="startSpeachRecognition()"
+  >
     <ion-fab-button>
       <ion-icon name="mic"></ion-icon>
     </ion-fab-button>

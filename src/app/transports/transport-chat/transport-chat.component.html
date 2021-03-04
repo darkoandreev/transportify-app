@@ -1,0 +1,55 @@
+<app-header
+  title="Chat group"
+  [showStartButtons]="false"
+  [showEndButtons]="true"
+  endButtonIcon="close-outline"
+  (endButtonClicked)="modalController.dismiss()"
+></app-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-row class="ion-justify-content-center">
+        <ng-container *ngFor="let applicant of driveTransport.applicants">
+          <div class="chat-profile-container">
+            <ion-avatar [routerLink]="['/tabs/profile', applicant.rider.username]">
+              <ion-icon *ngIf="!applicant.rider.imageUrl" name="camera"></ion-icon>
+              <img
+                *ngIf="applicant.rider.imageUrl"
+                [src]="env.FILE_URL + applicant.rider.imageUrl"
+              />
+            </ion-avatar>
+            <ion-text>{{ applicant.rider.firstName }}</ion-text>
+          </div>
+        </ng-container>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list lines="none">
+    <ion-item *ngFor="let message of messages">
+      <app-chat-bubble [chatMessage]="message"></app-chat-bubble>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <textarea
+      spellcheck="true"
+      autoComplete="true"
+      autocorrect="true"
+      rows="3"
+      class="chat-input"
+      [(ngModel)]="message"
+      placeholder="type message..."
+      (keyup.enter)="addChat()"
+    >
+    </textarea>
+    <ion-buttons slot="primary">
+      <ion-button (click)="addChat()" slot="end" class="send-chat-button">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

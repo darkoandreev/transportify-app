@@ -6,6 +6,7 @@
         [driveTransport]="driveTransport"
         [routerLink]="['/tabs', 'transports', 'drive-transport', driveTransport.id]"
         (apply)="applyForTransport($event)"
+        (cancelRide)="onCancelRide($event)"
       ></app-transport-search-result-list-item>
     </ng-container>
 

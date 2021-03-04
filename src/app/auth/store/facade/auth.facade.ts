@@ -36,6 +36,10 @@ export class AuthFacade {
     return this.authService.getUser();
   }
 
+  confirmAccount(confirmationToken: string): void {
+    this.store.dispatch(fromActions.confirmAccount({ confirmationToken }));
+  }
+
   async updateUserDetails(user: Partial<IUser>): Promise<void> {
     const userFromStorage = await this.authService.getUser();
     user = {

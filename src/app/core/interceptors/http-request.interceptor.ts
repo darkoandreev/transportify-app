@@ -9,7 +9,11 @@ import { Injectable } from '@angular/core';
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(public authService: AuthService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request.url.includes('login') || request.url.includes('signup')) {
+    if (
+      request.url.includes('login') ||
+      request.url.includes('signup') ||
+      request.url.includes('confirm-account')
+    ) {
       return next.handle(request);
     }
     return from(this.authService.getUser()).pipe(

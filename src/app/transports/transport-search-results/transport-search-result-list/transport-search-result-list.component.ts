@@ -1,5 +1,7 @@
+import { ApplicantStatusEnum, IApplicant } from '../../store/models/applicant.model';
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { IDriverTransport } from '../../store/models/drive.transport.model';
 import { IRideTransport } from '../../store/models/ride-transport.model';
 import { Observable } from 'rxjs';
@@ -35,7 +37,8 @@ export class TransportSearchResultListComponent implements OnInit, OnDestroy {
   constructor(
     private transportFacade: TransportFacade,
     private platform: Platform,
-    private pushService: PushNotificationService
+    private pushService: PushNotificationService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -54,5 +57,15 @@ export class TransportSearchResultListComponent implements OnInit, OnDestroy {
 
   applyForTransport(transport: IDriverTransport): void {
     this.transportFacade.applyForTransport(transport);
+  }
+
+  onCancelRide(applicant: IApplicant): void {
+    this.alertService.confirmAlert('Decline', 'Do you want to cancel the trip?', () => {
+      applicant = {
+        ...applicant,
+        applicantStatus: ApplicantStatusEnum.CANCELED,
+      };
+      this.transportFacade.updateApplicantStatus(applicant);
+    });
   }
 }
